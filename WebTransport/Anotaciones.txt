@@ -1,0 +1,29 @@
+
+				Registros Terminados:
+1-El registro de autobuses esta completo solo falta validarlo.
+2-El registro de paradas esta completo solo falta validarlo.
+3-El registro de choferes esta completo solo falta validarlo.
+4-El Registro envios esta completo solo falta validarlo. Agregarle entregado.
+
+
+				Consultas Terminadas:
+1-La consulta de autobuses esta completa.
+2-La consulta de paradas esta completa.
+3-La consulta de Choferes esta completa.
+4-La consulta de envio esta completa.
+5-La consulta de reservaciones esta completa.
+
+
+
+
+				siguientes cosas a realizar:
+1-Realizar la consulta de los autobuses y los choferes. Listo!!!!
+2-Registro de envios y la consulta. Listo!!!!
+3-Registro de Reservaciones y la consulta. la consulat esta lista!!! solo falta arreglar un problema con la fecha.
+4-Detalle hay que ver qu ese puede hacer porque acabo de explotar.
+
+
+
+
+
+
