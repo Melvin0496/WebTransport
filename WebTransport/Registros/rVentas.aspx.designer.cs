@@ -10,7 +10,7 @@
 namespace WebTransport.Registros {
     
     
-    public partial class rVentasTickets {
+    public partial class rVentas {
         
         /// <summary>
         /// VentaIdTextBox control.
@@ -76,13 +76,13 @@ namespace WebTransport.Registros {
         protected global::System.Web.UI.WebControls.TextBox DescripcionTextBox;
         
         /// <summary>
-        /// TipoEnvioTextBox control.
+        /// TipoEnvioDropDownList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TipoEnvioTextBox;
+        protected global::System.Web.UI.WebControls.DropDownList TipoEnvioDropDownList;
         
         /// <summary>
         /// PrecioTextBox control.

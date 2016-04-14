@@ -49,13 +49,13 @@ namespace WebTransport.Registros {
         protected global::System.Web.UI.WebControls.TextBox NombresTextBox;
         
         /// <summary>
-        /// RegularExpressionValidator control.
+        /// NombresRequiredFieldValidator control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator NombresRequiredFieldValidator;
         
         /// <summary>
         /// ApellidosTextBox control.
@@ -67,6 +67,15 @@ namespace WebTransport.Registros {
         protected global::System.Web.UI.WebControls.TextBox ApellidosTextBox;
         
         /// <summary>
+        /// ApellidosRequiredFieldValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ApellidosRequiredFieldValidator;
+        
+        /// <summary>
         /// CedulaTextBox control.
         /// </summary>
         /// <remarks>
@@ -74,6 +83,15 @@ namespace WebTransport.Registros {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox CedulaTextBox;
+        
+        /// <summary>
+        /// CedulaRequiredFieldValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator CedulaRequiredFieldValidator;
         
         /// <summary>
         /// AnoServicioTextBox control.
@@ -92,6 +110,15 @@ namespace WebTransport.Registros {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TelefonoTextBox;
+        
+        /// <summary>
+        /// TelefonoRequiredFieldValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator TelefonoRequiredFieldValidator;
         
         /// <summary>
         /// NuevoButton control.

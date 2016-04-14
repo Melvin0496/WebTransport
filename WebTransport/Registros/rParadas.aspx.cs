@@ -15,6 +15,7 @@ namespace WebTransport.Registros
             if (!IsPostBack)
             {
                 int Id;
+                EliminarButton.Enabled = false;
                 if (Request.QueryString["Id"] != null)
                 {
                     Id = Utilitarios.ToInt(Request.QueryString["Id"].ToString());
@@ -43,6 +44,7 @@ namespace WebTransport.Registros
             ParadaIdTextBox.Text = string.Empty;
             LugarTextBox.Text = string.Empty;
             TelefonoTextBox.Text = string.Empty;
+            EliminarButton.Enabled = false;
         }
 
         public void LlenarCampos(Paradas parada)
@@ -66,12 +68,12 @@ namespace WebTransport.Registros
         {
             Paradas parada = new Paradas();
 
-            if(ParadaIdTextBox.Text.Length == 0)
+            if (ParadaIdTextBox.Text.Length == 0)
             {
                 LlenarCampos(parada);
                 if (parada.Insertar())
                 {
-                    Utilitarios.ShowToastr(this,"Transaccion exitosa","Mensaje","Success");
+                    Utilitarios.ShowToastr(this, "Transaccion exitosa", "Mensaje", "Success");
                     Limpiar();
                 }
                 else
@@ -81,16 +83,23 @@ namespace WebTransport.Registros
             }
             else
             {
-                LlenarCampos(parada);
                 parada.ParadaId = Utilitarios.ToInt(ParadaIdTextBox.Text);
-                if (parada.Editar())
+                if (parada.ParadaId > 0)
                 {
-                    Utilitarios.ShowToastr(this, "Transaccion exitosa", "Mensaje", "Success");
-                    Limpiar();
-                }
-                else
-                {
-                    Utilitarios.ShowToastr(this, "Error al editar", "Error", "Danger");
+                    if (parada.Buscar(parada.ParadaId))
+                    {
+                        LlenarCampos(parada);
+                        if (parada.Editar())
+                        {
+                            Utilitarios.ShowToastr(this, "Transaccion exitosa", "Mensaje", "Success");
+                            Limpiar();
+                        }
+                    }
+                    else
+                    {
+                        Response.Write("<SCRIPT>alert('No se pudo editar...ID incorrecto')</SCRIPT>");
+                        Limpiar();
+                    }
                 }
             }
 
@@ -100,21 +109,26 @@ namespace WebTransport.Registros
         {
             Paradas parada = new Paradas();
 
-            if(ParadaIdTextBox.Text.Length == 0)
+            if (ParadaIdTextBox.Text.Length == 0)
             {
-                Utilitarios.ShowToastr(this, "Seleccione un id", "Alerta", "Warning");
+                Utilitarios.ShowToastr(this, "Introduzca un id", "Alerta", "Warning");
             }
             else
             {
                 parada.ParadaId = Utilitarios.ToInt(ParadaIdTextBox.Text);
-                if (parada.Eliminar())
+                if (parada.ParadaId > 0)
                 {
-                    Utilitarios.ShowToastr(this, "Transaccion exitosa", "Mensaje", "Success");
-                    Limpiar();
-                }
-                else
-                {
-                    Utilitarios.ShowToastr(this, "Error al eliminar", "Error", "Danger");
+                    if (parada.Buscar(parada.ParadaId))
+                    {
+                        parada.Eliminar();
+                        Utilitarios.ShowToastr(this, "Transaccion exitosa", "Mensaje", "Success");
+                        Limpiar();
+                    }
+                    else
+                    {
+                        Response.Write("<SCRIPT>alert('ID Incorrecto')</SCRIPT>");
+                        Limpiar();
+                    }
                 }
             }
         }
@@ -129,13 +143,19 @@ namespace WebTransport.Registros
             }
             else
             {
-                if (parada.Buscar(Utilitarios.ToInt(ParadaIdTextBox.Text)))
+                parada.ParadaId = Utilitarios.ToInt(ParadaIdTextBox.Text);
+                if (parada.ParadaId > 0)
                 {
-                    DevolverDatos(parada);
-                }
-                else
-                {
-                    Utilitarios.ShowToastr(this, "Error al buscar", "Error", "Danger");
+                    if (parada.Buscar(parada.ParadaId))
+                    {
+                        DevolverDatos(parada);
+                        EliminarButton.Enabled = true;
+                    }
+                    else
+                    {
+                        Response.Write("<SCRIPT>alert('ID no encontrado')</SCRIPT>");
+                        Limpiar();
+                    }
                 }
             }
         }

@@ -40,6 +40,15 @@ namespace WebTransport.Registros {
         protected global::System.Web.UI.WebControls.TextBox FichaTextBox;
         
         /// <summary>
+        /// FichaRequiredFieldValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator FichaRequiredFieldValidator;
+        
+        /// <summary>
         /// MarcaTextBox control.
         /// </summary>
         /// <remarks>
@@ -47,6 +56,15 @@ namespace WebTransport.Registros {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox MarcaTextBox;
+        
+        /// <summary>
+        /// MarcaRequiredFieldValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator MarcaRequiredFieldValidator;
         
         /// <summary>
         /// ModeloTextBox control.
@@ -58,13 +76,31 @@ namespace WebTransport.Registros {
         protected global::System.Web.UI.WebControls.TextBox ModeloTextBox;
         
         /// <summary>
-        /// AnoTextBox control.
+        /// ModeloRequiredFieldValidator control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox AnoTextBox;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ModeloRequiredFieldValidator;
+        
+        /// <summary>
+        /// AnnoTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox AnnoTextBox;
+        
+        /// <summary>
+        /// AnnoRequiredFieldValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator AnnoRequiredFieldValidator;
         
         /// <summary>
         /// CantidadPasajerosTextBox control.
@@ -74,6 +110,15 @@ namespace WebTransport.Registros {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox CantidadPasajerosTextBox;
+        
+        /// <summary>
+        /// CantidadPasajerosRequiredFieldValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator CantidadPasajerosRequiredFieldValidator;
         
         /// <summary>
         /// AireCheckBox control.

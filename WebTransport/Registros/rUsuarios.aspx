@@ -29,7 +29,9 @@
                 <div class="form-group">
                     <label for="NombresTextBox" class="col-md-3 control-label input-sm">Nombres: </label>
                     <div class="col-md-5">
-                        <asp:TextBox ID="NombresTextBox" runat="server" Class="form-control input-sm" placeholder="Introduzca su Nombre aqui"></asp:TextBox>
+                        <asp:TextBox ID="NombresTextBox" runat="server" Class="form-control input-sm" placeholder="(requerido)" MaxLength="40"></asp:TextBox>
+                         <asp:RequiredFieldValidator ID="NombresRequiredFieldValidator" runat="server" ErrorMessage="No puede dejar este campo vacío" ValidationGroup="UsuarioForm" ControlToValidate="NombresTextBox" Display="Dynamic" Font-Bold="True" ForeColor="Red"></asp:RequiredFieldValidator>
+
                     </div>
                     <div class="col-md-1">
                     </div>
@@ -39,8 +41,8 @@
                 <div class="form-group">
                     <label for="ApellidosTextBox" class="col-md-3 control-label input-sm">Apellidos: </label>
                     <div class="col-md-5">
-                        <asp:TextBox ID="ApellidosTextBox" runat="server" Class="form-control input-sm" placeholder="Introduzca su Apellido aqui"></asp:TextBox>
-
+                        <asp:TextBox ID="ApellidosTextBox" runat="server" Class="form-control input-sm" placeholder="(Requerido)" MaxLength="40"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="ApellidosRequiredFieldValidator" runat="server" ErrorMessage="No puede dejar este campo vacío" ValidationGroup="UsuarioForm" ControlToValidate="ApellidosTextBox" Display="Dynamic" Font-Bold="True" ForeColor="Red"></asp:RequiredFieldValidator>
 
                     </div>
                     <div class="col-md-1">
@@ -49,10 +51,10 @@
 
                 <%--Email--%>
                 <div class="form-group">
-                    <label for="EmailTextBox" class="col-md-3 control-label input-sm">Email: </label>
+                    <label for="REmailTextBox" class="col-md-3 control-label input-sm">Email: </label>
                     <div class="col-md-5">
-                        <asp:TextBox ID="EmailTextBox" runat="server" Class="form-control input-sm" placeholder="Introduzca su Email aqui" type="email"></asp:TextBox>
-
+                        <asp:TextBox ID="REmailTextBox" runat="server" Class="form-control input-sm" placeholder="(Requerido)" type="email"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="EmailRequiredFieldValidator" runat="server" ErrorMessage="No puede dejar este campo vacío" ValidationGroup="UsuarioForm" ControlToValidate="REmailTextBox" Display="Dynamic" Font-Bold="True" ForeColor="Red"></asp:RequiredFieldValidator>
 
                     </div>
                     <div class="col-md-1">
@@ -63,10 +65,10 @@
 
 
                 <div class="form-group">
-                    <label for="ContrasenaTextBox" class="col-md-3 control-label input-sm">Contraseña: </label>
+                    <label for="RContrasenaTextBox" class="col-md-3 control-label input-sm">Contraseña: </label>
                     <div class="col-md-5">
-                        <asp:TextBox ID="ContrasenaTextBox" runat="server" class="form-control input-sm" placeholder="Introduzca su contraseña aqui" type="password"></asp:TextBox>
-
+                        <asp:TextBox ID="RContrasenaTextBox" runat="server" class="form-control input-sm" placeholder="(Requerido)" type="password" MaxLength="30"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="ContrasenaRequiredFieldValidator" runat="server" ErrorMessage="No puede dejar este campo vacío" ValidationGroup="UsuarioForm" ControlToValidate="RContrasenaTextBox" Display="Dynamic" Font-Bold="True" ForeColor="Red"></asp:RequiredFieldValidator>
                     </div>
                     <div class="col-md-1">
                     </div>
@@ -77,9 +79,8 @@
                 <div class="form-group">
                     <label for="TipoUsuarioDropDownList" class="col-md-3 control-label input-sm">Tipo de Usuario: </label>
                     <div class="col-md-5">
-                        <asp:DropDownList ID="TipoUsuarioDropDownList" runat="server" Class="form-control input-sm">
+                        <asp:DropDownList ID="TipoUsuarioDropDownList" runat="server" Class="form-control input-sm btn-default">
                             <asp:ListItem>Administrador</asp:ListItem>
-                            <asp:ListItem>Empleado</asp:ListItem>
                             <asp:ListItem>Normal</asp:ListItem>
                         </asp:DropDownList>
 
@@ -110,8 +111,8 @@
                 <div class="form-group" style="display: inline-block">
 
                     <asp:Button Text="Nuevo" class="btn btn-warning btn-md" runat="server" ID="NuevoButton" OnClick="NuevoButton_Click" />
-                    <asp:Button Text="Guardar" class="btn btn-primary btn-md" runat="server" ID="GuadarButton" OnClick="GuadarButton_Click" />
-                    <asp:Button Text="Eliminar" class="btn btn-danger btn-md" runat="server" ID="EliminarButton" />
+                    <asp:Button Text="Guardar" class="btn btn-primary btn-md" runat="server" ID="GuadarButton" OnClick="GuadarButton_Click" ValidationGroup="UsuarioForm" />
+                    <asp:Button Text="Eliminar" class="btn btn-danger btn-md" runat="server" ID="EliminarButton" OnClick="EliminarButton_Click" />
 
                 </div>
             </div>

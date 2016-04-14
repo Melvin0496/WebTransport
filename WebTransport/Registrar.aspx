@@ -28,7 +28,7 @@
                     <div class="form-group">
                         <label for="NombresTextBox" class="col-md-3 control-label input-sm">Nombres: </label>
                         <div class="col-md-9">
-                            <asp:TextBox ID="NombresTextBox" runat="server" Class="form-control input-sm" placeholder="Introduce tu Nombre aquí"></asp:TextBox>
+                            <asp:TextBox ID="NombresTextBox" runat="server" Class="form-control input-sm" placeholder="Introduce tu Nombre aquí" MaxLength="40"></asp:TextBox>
 
 
                         </div>
@@ -40,7 +40,7 @@
                     <div class="form-group">
                         <label for="ApelllidosTextBox" class="col-md-3 control-label input-sm">Apellidos</label>
                         <div class="col-md-9">
-                            <asp:TextBox ID="ApellidosTextBox" runat="server" Class="form-control input-sm" placeholder="Introduce tu Apellido aquí"></asp:TextBox>
+                            <asp:TextBox ID="ApellidosTextBox" runat="server" Class="form-control input-sm" placeholder="Introduce tu Apellido aquí" MaxLength="40"></asp:TextBox>
 
 
                         </div>
@@ -52,7 +52,7 @@
                     <div class="form-group">
                         <label for="EmailTextBox" class="col-md-3 control-label input-sm">Email:</label>
                         <div class="col-md-9">
-                            <asp:TextBox ID="EmailTextBox" runat="server" Class="form-control input-sm" type="email" placeholder="Example@webtransport.com"></asp:TextBox>
+                            <asp:TextBox ID="EmailTextBox" runat="server" Class="form-control input-sm" type="email" placeholder="Example@webtransport.com" MaxLength="100"></asp:TextBox>
 
 
                         </div>
@@ -64,7 +64,7 @@
                     <div class="form-group">
                         <label for="PasswordTextBox" class="col-md-3 control-label input-sm">Password:</label>
                         <div class="col-md-9">
-                            <asp:TextBox ID="PasswordTextBox" runat="server" Class="form-control input-sm" type="password" placeholder="******"></asp:TextBox>
+                            <asp:TextBox ID="PasswordTextBox" runat="server" Class="form-control input-sm" type="password" placeholder="******" MaxLength="30"></asp:TextBox>
 
 
                         </div>
@@ -76,7 +76,7 @@
                     <div class="form-group">
                         <label for="ComfirmPasswordTextBox" class="col-md-3 control-label input-sm">Comfirm Password:</label>
                         <div class="col-md-9">
-                            <asp:TextBox ID="ComfirmPasswordTextBox" runat="server" Class="form-control input-sm" type="password" placeholder="******"></asp:TextBox>
+                            <asp:TextBox ID="ComfirmPasswordTextBox" runat="server" Class="form-control input-sm" type="password" placeholder="******" MaxLength="30"></asp:TextBox>
 
 
                         </div>
@@ -89,12 +89,13 @@
             </div>
 
 
-          
 
-                <asp:Button Text="Registrar  " class="btn btn-primary  col-md-10 col-md-offset-1" runat="server" ID="GuardarButton" OnClick="GuardarButton_Click" /><br /><br />
-                <asp:Button Text="Cancelar" class="btn btn-danger  col-md-10 col-md-offset-1 " runat="server" ID="CancelarButton" OnClick="CancelarButton_Click1" />
 
-           
+            <asp:Button Text="Registrar  " class="btn btn-primary  col-md-10 col-md-offset-1" runat="server" ID="GuardarButton" OnClick="GuardarButton_Click" /><br />
+            <br />
+            <asp:Button Text="Cancelar" class="btn btn-danger  col-md-10 col-md-offset-1 " runat="server" ID="CancelarButton" OnClick="CancelarButton_Click1" />
+
+
         </form>
     </div>
 

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Text.RegularExpressions;
 using BLL;
 
 namespace WebTransport.Registros
@@ -15,6 +14,7 @@ namespace WebTransport.Registros
         {
             if (!IsPostBack)
             {
+                EliminarButton.Enabled = false;
                 int Id;
                 if (Request.QueryString["Id"] != null)
                 {
@@ -45,9 +45,28 @@ namespace WebTransport.Registros
             FichaTextBox.Text = string.Empty;
             MarcaTextBox.Text = string.Empty;
             ModeloTextBox.Text = string.Empty;
-            AnoTextBox.Text = string.Empty;
+            AnnoTextBox.Text = string.Empty;
             CantidadPasajerosTextBox.Text = string.Empty;
             AireCheckBox.Checked = false;
+            EliminarButton.Enabled = false;
+        }
+
+        public void DevolverDatos(Autobuses autobus)
+        {
+            FichaTextBox.Text = autobus.Ficha;
+            MarcaTextBox.Text = autobus.Marca;
+            ModeloTextBox.Text = autobus.Modelo;
+            AnnoTextBox.Text = autobus.Ano.ToString();
+            CantidadPasajerosTextBox.Text = autobus.CantidadPasajeros.ToString();
+
+            if (autobus.Aire == 1)
+            {
+                AireCheckBox.Checked = true;
+            }
+            else
+            {
+                AireCheckBox.Checked = false;
+            }
         }
 
         public void LlenarDatos(Autobuses autobus)
@@ -55,7 +74,7 @@ namespace WebTransport.Registros
             autobus.Ficha = FichaTextBox.Text;
             autobus.Marca = MarcaTextBox.Text;
             autobus.Modelo = ModeloTextBox.Text;
-            autobus.Ano = Utilitarios.ToInt(AnoTextBox.Text);
+            autobus.Ano = Utilitarios.ToInt(AnnoTextBox.Text);
             autobus.CantidadPasajeros = Utilitarios.ToInt(CantidadPasajerosTextBox.Text);
 
             if (AireCheckBox.Checked)
@@ -68,23 +87,6 @@ namespace WebTransport.Registros
             }
         }
 
-        public void DevolverDatos(Autobuses autobus)
-        {
-            FichaTextBox.Text = autobus.Ficha;
-            MarcaTextBox.Text = autobus.Marca;
-            ModeloTextBox.Text = autobus.Modelo;
-            AnoTextBox.Text = autobus.Ano.ToString();
-            CantidadPasajerosTextBox.Text = autobus.CantidadPasajeros.ToString();
-
-            if(autobus.Aire == 1)
-            {
-                AireCheckBox.Checked = true;
-            }
-            else
-            {
-                AireCheckBox.Checked = false;
-            }
-        }
         protected void NuevoButton_Click(object sender, EventArgs e)
         {
             Limpiar();
@@ -94,55 +96,40 @@ namespace WebTransport.Registros
         {
             Autobuses autobus = new Autobuses();
 
-                if (AutobusIdTextBox.Text.Length == 0)
-                {
-                    LlenarDatos(autobus);
-                    if (autobus.Insertar())
-                    {
-                        Utilitarios.ShowToastr(this, "Transaccion exitosa!!!", "Mensaje", "Success");
-                        Limpiar();
-                    }
-                    else
-                    {
-                        Utilitarios.ShowToastr(this, "Error al Insertar", "Error", "Danger");
-                    }
-                }
-                else
-                {
-                    LlenarDatos(autobus);
-                    autobus.AutobusId = Utilitarios.ToInt(AutobusIdTextBox.Text);
-                    if (autobus.Editar())
-                    {
-                        Utilitarios.ShowToastr(this, "Transaccion exitosa!!!", "Mensaje", "Success");
-                        Limpiar();
-                    }
-                    else
-                    {
-                        Utilitarios.ShowToastr(this, "Error al editar", "Error", "Danger");
-                    }
-                }
-        }
-
-        protected void EliminarButton_Click(object sender, EventArgs e)
-        {
-            Autobuses autobus = new Autobuses();
-
-            if(AutobusIdTextBox.Text.Length == 0)
+            if (AutobusIdTextBox.Text.Length == 0)
             {
-               Utilitarios.ShowToastr(this,"Seleccione un id","Alerta","Warning");
-            }
-            else
-            {
-                autobus.AutobusId = Utilitarios.ToInt(AutobusIdTextBox.Text);
-
-                if (autobus.Eliminar())
+                LlenarDatos(autobus);
+                if (autobus.Insertar())
                 {
-                    Utilitarios.ShowToastr(this, "Eliminacion completada", "Mensaje", "Success");
+                    Utilitarios.ShowToastr(this, "Transaccion exitosa!!!", "Mensaje", "Success");
                     Limpiar();
                 }
                 else
                 {
-                    Utilitarios.ShowToastr(this, "Error al eliminar", "Error", "Danger");
+                    Utilitarios.ShowToastr(this, "Error al Insertar", "Error", "Danger");
+                }
+            }
+            else
+            {
+                autobus.AutobusId = Utilitarios.ToInt(AutobusIdTextBox.Text);
+                if (autobus.AutobusId > 0)
+                {
+                    if (autobus.Buscar(autobus.AutobusId))
+                    {
+                        LlenarDatos(autobus);
+                        if (autobus.Editar())
+                        {
+                            Utilitarios.ShowToastr(this, "Transaccion exitosa!!!", "Mensaje", "Success");
+                            Limpiar();
+                        }
+                        
+                    }
+                    else
+                    {
+                        Response.Redirect("<SCRIPT>alert('No se pudo editar...ID incorrecto')</SCRIPT>");
+                        Limpiar();
+
+                    }
                 }
             }
         }
@@ -151,21 +138,55 @@ namespace WebTransport.Registros
         {
             Autobuses autobus = new Autobuses();
 
-            if(AutobusIdTextBox.Text.Length == 0)
+            if (AutobusIdTextBox.Text.Length == 0)
             {
-                Utilitarios.ShowToastr(this, "Seleccione un id", "Alerta", "Warning");
+                Utilitarios.ShowToastr(this, "Introduzca un id", "Alerta", "Warning");
             }
             else
             {
-                if (autobus.Buscar(Utilitarios.ToInt(AutobusIdTextBox.Text)))
+                autobus.AutobusId = Utilitarios.ToInt(AutobusIdTextBox.Text);
+                if (autobus.AutobusId > 0)
                 {
-                    DevolverDatos(autobus);
+                    if (autobus.Buscar(autobus.AutobusId))
+                    {
+                        DevolverDatos(autobus);
+                        EliminarButton.Enabled = true;
+                    }
+                    else
+                    {
+                        Response.Redirect("<SCRIPT>alert('ID no encontrado')</SCRIPT>");
+                        Limpiar();
+                    }
                 }
-                else
+
+            }
+        }
+
+        protected void EliminarButton_Click(object sender, EventArgs e)
+        {
+            Autobuses autobus = new Autobuses();
+
+            if (AutobusIdTextBox.Text.Length == 0)
+            {
+                Utilitarios.ShowToastr(this, "Introduzca un Id", "Alerta", "Warning");
+            }
+            else
+            {
+                autobus.AutobusId = Utilitarios.ToInt(AutobusIdTextBox.Text);
+                if (autobus.AutobusId > 0)
                 {
-                    Utilitarios.ShowToastr(this, "Error tratando de buscar", "Error", "Danger");
+                    if (autobus.Buscar(autobus.AutobusId))
+                    {
+                        autobus.Eliminar();
+                        Utilitarios.ShowToastr(this, "Eliminacion completada", "Mensaje", "Success");
+                        Limpiar();
+                    }
+                    else
+                    {
+                        Response.Redirect("<SCRIPT>alert('ID incorrecto')</SCRIPT>");
+                        Limpiar();
+                    }
                 }
-                
             }
         }
     }

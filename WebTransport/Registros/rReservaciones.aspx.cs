@@ -15,6 +15,7 @@ namespace WebTransport.Registros
             if (!IsPostBack)
             {
                 LlenarDropDownList();
+                EliminarButton.Enabled = false;
                 int Id;
                 if (Request.QueryString["Id"] != null)
                 {
@@ -46,6 +47,7 @@ namespace WebTransport.Registros
             CantidadAsientoTextBox.Text = string.Empty;
             FechaTextBox.Text = string.Empty;
             esActivaCheckBox.Checked = false;
+            EliminarButton.Enabled = false;
         }
 
         public void LlenarDropDownList()
@@ -63,7 +65,7 @@ namespace WebTransport.Registros
             reservacion.UsuarioId = Utilitarios.ToInt(UsuarioIdDropDownList.SelectedValue);
             reservacion.Lugar = LugarTextBox.Text;
             reservacion.CantidadAsientos = Utilitarios.ToInt(CantidadAsientoTextBox.Text);
-            reservacion.Fecha = FechaTextBox.Text;
+            reservacion.Fecha = Utilitarios.ToDatetime(FechaTextBox.Text);
 
             if (esActivaCheckBox.Checked)
             {
@@ -81,9 +83,9 @@ namespace WebTransport.Registros
             UsuarioIdDropDownList.SelectedValue = reservacion.UsuarioId.ToString();
             LugarTextBox.Text = reservacion.Lugar;
             CantidadAsientoTextBox.Text = reservacion.CantidadAsientos.ToString();
-            FechaTextBox.Text = reservacion.Fecha;
+            FechaTextBox.Text = reservacion.Fecha.ToString("yyyy-MM-dd");
 
-            if(reservacion.esActiva == 1)
+            if (reservacion.esActiva == 1)
             {
                 esActivaCheckBox.Checked = true;
             }
@@ -102,55 +104,96 @@ namespace WebTransport.Registros
         {
             Reservaciones reservacion = new Reservaciones();
 
-            LlenarCampos(reservacion);
-            if(ReservacionIdTextBox.Text.Length == 0)
+
+            if (ReservacionIdTextBox.Text.Length == 0)
             {
+                LlenarCampos(reservacion);
                 if (reservacion.Insertar())
                 {
-                    Utilitarios.ShowToastr(this,"Transaccion exitosa!!!","Mensaje","Success");
+                    Utilitarios.ShowToastr(this, "Transaccion exitosa!!!", "Mensaje", "Success");
                     Limpiar();
                 }
                 else
                 {
-                    Utilitarios.ShowToastr(this,"Error al insertar","Error","Danger");
+                    Utilitarios.ShowToastr(this, "Error al insertar", "Error", "Danger");
                 }
             }
             else
             {
-                Utilitarios.ToInt(ReservacionIdTextBox.Text);
-                if (reservacion.Editar())
+                reservacion.ReservacionId = Utilitarios.ToInt(ReservacionIdTextBox.Text);
+                if (reservacion.ReservacionId > 0)
                 {
-                    Utilitarios.ShowToastr(this,"Transaccion exitosa!!!","Mensaje","Success");
-                    Limpiar();
-                }
-                else
-                {
-                    Utilitarios.ShowToastr(this,"Error al editar","Error","Success");
+                    if (reservacion.Buscar(reservacion.ReservacionId))
+                    {
+                        LlenarCampos(reservacion);
+                        if (reservacion.Editar())
+                        {
+                            Utilitarios.ShowToastr(this, "Transaccion exitosa!!!", "Mensaje", "Success");
+                            Limpiar();
+                        }
+                    }
+                    else
+                    {
+                        Response.Write("<SCRIPT>alert('No se pudo editar...ID incorrecto')</SCRIPT>");
+                        Limpiar();
+                    }
                 }
             }
-
-
         }
 
         protected void EliminarButton_Click(object sender, EventArgs e)
         {
             Reservaciones reservacion = new Reservaciones();
 
-            if(ReservacionIdTextBox.Text.Length == 0)
+            if (ReservacionIdTextBox.Text.Length == 0)
             {
-                Utilitarios.ShowToastr(this,"Seleccione un ID","Alerta","Warning");
+                Utilitarios.ShowToastr(this, "Introduzca un ID", "Alerta", "Warning");
             }
             else
             {
                 reservacion.ReservacionId = Utilitarios.ToInt(ReservacionIdTextBox.Text);
-                if (reservacion.Buscar(reservacion.ReservacionId) && reservacion.Eliminar())
+                if (reservacion.ReservacionId > 0)
                 {
-                    Utilitarios.ShowToastr(this,"Eliminado Corectamente","Mensaje","Success");
+                    if (reservacion.Buscar(reservacion.ReservacionId))
+                    {
+                        reservacion.Eliminar();
+                        Utilitarios.ShowToastr(this, "Eliminado Corectamente", "Mensaje", "Success");
+                        Limpiar();
+                    }
+                    else
+                    {
+                        Response.Write("<SCRIPT>alert('ID incorrecto')</SCRIPT>");
+                        Limpiar();
+                    }
                 }
-                else
+            }
+        }
+
+        protected void BuscarButton_Click(object sender, EventArgs e)
+        {
+            Reservaciones reservacion = new Reservaciones();
+
+            if (ReservacionIdTextBox.Text.Length == 0)
+            {
+                Utilitarios.ShowToastr(this, "Introduzca un ID", "Alerta", "Warning");
+            }
+            else
+            {
+                reservacion.ReservacionId = Utilitarios.ToInt(ReservacionIdTextBox.Text);
+                if (reservacion.ReservacionId > 0)
                 {
-                    Utilitarios.ShowToastr(this,"No exite ese ID","Error","Danger");
+                    if (reservacion.Buscar(reservacion.ReservacionId))
+                    {
+                        DevolverDatos(reservacion);
+                        EliminarButton.Enabled = true;
+                    }
+                    else
+                    {
+                        Response.Write("<SCRIPT>alert('ID no encontrado')</SCRIPT>");
+                        Limpiar();
+                    }
                 }
+                
             }
         }
     }

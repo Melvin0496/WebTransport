@@ -1,12 +1,13 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="cPasajeros.aspx.cs" Inherits="WebTransport.Consultas.cPasajeros" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="cTipoEnvios.aspx.cs" Inherits="WebTransport.Consultas.cTipoEnvios" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+    
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
             <div class="panel panel-success text-center">
-        <div class="panel-heading">Consulta de Pasajeros</div>
+        <div class="panel-heading">Consulta de Tipo Envios</div>
 
         <div class="panel-body col-md-offset-2">
             <div class="form-horizontal col-md-12" role="form">
@@ -16,8 +17,8 @@
                     <label for="CamposDropDownList" class="col-md-3 col-xs-3 control-label input-sm">Buscar por: </label>
                     <div class="col-md-2 col-sm-2 col-xs-3">
                         <asp:DropDownList ID="CamposDropDownList" runat="server" class="form-control input-sm btn-info">
-                            <asp:ListItem>PasajeroId</asp:ListItem>
-                            <asp:ListItem>Nombres</asp:ListItem>
+                            <asp:ListItem>TipoEnvioId</asp:ListItem>
+                            <asp:ListItem>Descripcion</asp:ListItem>
                         </asp:DropDownList>
                     </div>
                     <div class ="col-md-4 col-sm-3 col-xs-3">
@@ -36,7 +37,7 @@
                     <div class="col-md-8 col-md-offset-2 col-sm-4 col-xs-2">
                         <asp:GridView ID="DatosGridView" runat="server" class="table table-bordered table-hover table-striped table-responsive" AutoGenerateColumns="true">
                             <Columns>
-                                <asp:HyperLinkField DataNavigateUrlFields="PasajeroId" DataNavigateUrlFormatString="~/Registros/rPasajeros.aspx?Id={0}" Text="Editar" />
+                                <asp:HyperLinkField DataNavigateUrlFields="TipoEnvioId" DataNavigateUrlFormatString="~/Registros/rTipoEnvios.aspx?Id={0}" Text="Editar" />
                             </Columns>
                         </asp:GridView>
                     </div>

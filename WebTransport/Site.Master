@@ -84,18 +84,6 @@
                                     <i class="fa fa-user"></i>
                                     <asp:Label ID="UsuarioLabel" runat="server"></asp:Label>
                                 </a>
-                                <ul class="dropdown-menu">
-                                    <!-- User image -->
-                                    <li class="user-header">
-                                        <img src="/Imagenes/imagen1.jpg" class="img-circle" alt="User Image">
-                                    </li>
-                                    <!-- Menu Footer-->
-                                    <li class="user-footer">
-                                        <div class="pull-left">
-                                            <a href="/SingOut.aspx" class="btn btn-default btn-flat">Sign out</a>
-                                        </div>
-                                    </li>
-                                </ul>
                             </li>
                             <!-- Control Sidebar Toggle Button -->
 
@@ -115,7 +103,7 @@
                     </div>
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
-                        <li class="header">MAIN NAVIGATION</li>
+                        <li class="header">NAVEGACION</li>
                         <li id="UsuariosLi" runat="server" class="treeview">
                             <a href="#">
                                 <i class="glyphicon glyphicon-user"></i><span>Usuarios</span> <i class="fa fa-angle-left pull-right"></i>
@@ -125,7 +113,7 @@
                                 <li><a href="/Consultas/cUsuarios.aspx"><i class="glyphicon glyphicon-file"></i>Consultar</a></li>
                             </ul>
                         </li>
-                        <li id="Melvin" runat="server" class="treeview">
+                        <li id="ParadaLi" runat="server" class="treeview">
                             <a href="#">
                                 <i class="fa fa-stop"></i>
                                 <span>Paradas</span>
@@ -136,7 +124,7 @@
                                 <li><a href="/Consultas/cParadas.aspx"><i class="glyphicon glyphicon-file"></i>Consultar</a></li>
                             </ul>
                         </li>
-                        <li class="treeview">
+                        <li id="ChoferesLi" runat="server" class="treeview">
                             <a href="#">
                                 <i class="fa fa-user-plus"></i>
                                 <span>Choferes</span>
@@ -147,7 +135,7 @@
                                 <li><a href="/Consultas/cChoferes.aspx"><i class="glyphicon glyphicon-file"></i>Consultar</a></li>
                             </ul>
                         </li>
-                        <li class="treeview">
+                        <li  class="treeview">
                             <a href="#">
                                 <i class="glyphicon glyphicon-save-file"></i>
                                 <span>Reservaciones</span>
@@ -155,12 +143,12 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="/Registros/rReservaciones.aspx"><i class="glyphicon glyphicon-edit"></i>Registrar</a></li>
-                                <li><a href="/Consultas/cReservaciones.aspx"><i class="glyphicon glyphicon-file"></i>Consultar</a></li>
-                                <li><a href="#"><i class="fa fa-circle-o"></i>Mis reservaciones</a></li>
+                                <li id="ReservacionesConsultaLi" runat="server"><a href="/Consultas/cReservaciones.aspx"><i class="glyphicon glyphicon-file"></i>Consultar</a></li>
+                                <li id="MiReservacionesLi" runat="server"><a href="/Consultas/cMisReservaciones.aspx"><i class="fa fa-circle-o"></i>Mis reservaciones</a></li>
                             </ul>
                         </li>
 
-                        <li class="treeview">
+                        <li id="AutobusesLi" runat="server" class="treeview">
                             <a href="#">
                                 <i class="fa fa-bus"></i>
                                 <span>Autobuses</span>
@@ -172,9 +160,9 @@
                             </ul>
                         </li>
 
-                        <li class="treeview">
+                        <li id="PasajerosLi" runat="server" class="treeview">
                             <a href="#">
-                                <i class="glyphicon glyphicon-user"></i>
+                                <i class="glyphicon glyphicon-plus"></i>
                                 <span>Pasajeros</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
@@ -184,23 +172,41 @@
                             </ul>
                         </li>
 
-                        <li class="treeview">
+                         <li id="TipoEnvioLi" runat="server" class="treeview">
+                            <a href="#">
+                                <i class="glyphicon glyphicon-send"></i>
+                                <span>Tipo Envios</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="/Registros/rTipoEnvios.aspx"><i class="glyphicon glyphicon-edit"></i>Registrar</a></li>
+                                <li><a href="/Consultas/cTipoEnvios.aspx"><i class="glyphicon glyphicon-file"></i>Consultar</a></li>
+                            </ul>
+                        </li>
+
+                        <li id="VentasLi" runat="server" class="treeview">
                             <a href="#">
                                 <i class="fa fa-ticket"></i><span>Ventas</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="/Registros/rVentasTickets.aspx"><i class="glyphicon glyphicon-edit"></i>Registrar</a></li>
-                                <li><a href="/Consultas/cVentasTickets.aspx"><i class="glyphicon glyphicon-file"></i>Consultar</a></li>
+                                <li><a href="/Registros/rVentas.aspx"><i class="glyphicon glyphicon-edit"></i>Registrar</a></li>
+                                <li><a href="/Consultas/cVentas.aspx"><i class="glyphicon glyphicon-file"></i>Consultar</a></li>
                             </ul>
                         </li>
+                        <li class="treeview">
+                            <a href="/Utilidad/SingOut.aspx">
+                                <i class="glyphicon glyphicon-log-out"></i><span>Cerrar Sesion</span>
+                            </a>
+                        </li>
+
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-question"></i><span>Ayuda</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="#"><i class="glyphicon glyphicon-edit"></i>Contanctanos</a></li>
+                                <li><a href="Utilidad/Contactanos.aspx"><i class="glyphicon glyphicon-edit"></i>Contanctanos</a></li>
                                 <li><a href="#"><i class="glyphicon glyphicon-file"></i>Acerca de</a></li>
                             </ul>
                         </li>
@@ -215,114 +221,6 @@
             <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
-
-            <aside class="control-sidebar control-sidebar-dark">
-                <!-- Create the tabs -->
-                <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-                    <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-                    <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-                </ul>
-                <!-- Tab panes -->
-                <div class="tab-content">
-                    <!-- Home tab content -->
-                    <div class="tab-pane" id="control-sidebar-home-tab">
-                        <h3 class="control-sidebar-heading">Recent Activity</h3>
-                        <ul class="control-sidebar-menu">
-                            <li>
-                                <a href="javascript::;">
-                                    <i class="menu-icon fa fa-birthday-cake bg-red"></i>
-                                    <div class="menu-info">
-                                        <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
-                                        <p>Will be 23 on April 24th</p>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript::;">
-                                    <i class="menu-icon fa fa-user bg-yellow"></i>
-                                    <div class="menu-info">
-                                        <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
-                                        <p>New phone +1(800)555-1234</p>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript::;">
-                                    <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
-                                    <div class="menu-info">
-                                        <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
-                                        <p>nora@example.com</p>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript::;">
-                                    <i class="menu-icon fa fa-file-code-o bg-green"></i>
-                                    <div class="menu-info">
-                                        <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
-                                        <p>Execution time 5 seconds</p>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                        <!-- /.control-sidebar-menu -->
-
-                        <h3 class="control-sidebar-heading">Tasks Progress</h3>
-                        <ul class="control-sidebar-menu">
-                            <li>
-                                <a href="javascript::;">
-                                    <h4 class="control-sidebar-subheading">Custom Template Design
-                        <span class="label label-danger pull-right">70%</span>
-                                    </h4>
-                                    <div class="progress progress-xxs">
-                                        <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript::;">
-                                    <h4 class="control-sidebar-subheading">Update Resume
-                        <span class="label label-success pull-right">95%</span>
-                                    </h4>
-                                    <div class="progress progress-xxs">
-                                        <div class="progress-bar progress-bar-success" style="width: 95%"></div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript::;">
-                                    <h4 class="control-sidebar-subheading">Laravel Integration
-                        <span class="label label-warning pull-right">50%</span>
-                                    </h4>
-                                    <div class="progress progress-xxs">
-                                        <div class="progress-bar progress-bar-warning" style="width: 50%"></div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript::;">
-                                    <h4 class="control-sidebar-subheading">Back End Framework
-                        <span class="label label-primary pull-right">68%</span>
-                                    </h4>
-                                    <div class="progress progress-xxs">
-                                        <div class="progress-bar progress-bar-primary" style="width: 68%"></div>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                        <!-- /.control-sidebar-menu -->
-
-                    </div>
-                    <!-- /.tab-pane -->
-
-                </div>
-                <!-- /.tab-pane -->
-        </div>
-        </aside><!-- /.control-sidebar -->
-        <!-- Add the sidebar's background. This div must be placed
-               immediately after the control sidebar -->
-        <div class="control-sidebar-bg"></div>
-
         </div><!-- ./wrapper -->
 
         <!-- jQuery 2.1.4 -->
@@ -363,7 +261,7 @@
         <!-- AdminLTE for demo purposes -->
         <script src="/dist/js/demo.js"></script>
         <script src="../Script/toastr.min.js"></script>
-
+        
 
         <footer class="main-footer">
             <div class="pull-right hidden-xs">

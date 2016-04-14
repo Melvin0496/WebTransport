@@ -14,8 +14,8 @@ namespace DAL
 
         public ConexionDb()
         {
-            //Data Source=tcp:webtrasport01.database.windows.net,1433;Initial Catalog=WebTransportDb;User ID=admin01@webtrasport01;Password=Melvin1996,
-            //Data Source = MASTER - PC\\ROOT; Initial Catalog = WebTransportDb; Integrated Security = true
+            //Data Source=tcp:webtrasport01.database.windows.net,1433;Initial Catalog=WebTransportDb;User ID=admin01@webtrasport01;Password=Melvin1996, 
+            //Data Source = MASTER - PC\\ROOT; Initial Catalog = WebTransportDb; Integrated Security = true 
             conexion = new SqlConnection(@"Data Source = MASTER-PC\ROOT; Initial Catalog = WebTransportDb; Integrated Security = true");
             comando = new SqlCommand();
         }
@@ -29,7 +29,8 @@ namespace DAL
                 comando.CommandText = ComandoSql;
                 comando.ExecuteNonQuery();
                 retorno = true;
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -44,6 +45,7 @@ namespace DAL
             DataTable dt = new DataTable();
             SqlDataAdapter adapter;
 
+
             try
             {
                 conexion.Open();
@@ -52,7 +54,8 @@ namespace DAL
 
                 adapter = new SqlDataAdapter(comando);
                 adapter.Fill(dt);
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -66,12 +69,14 @@ namespace DAL
         {
             Object retorno = null;
 
+
             try
             {
                 conexion.Open();
                 comando.Connection = conexion;
                 comando.CommandText = ComandoSql;
                 retorno = comando.ExecuteScalar();
+
 
             }
             catch (Exception ex)
@@ -86,4 +91,6 @@ namespace DAL
             return retorno;
         }
     }
+
 }
+

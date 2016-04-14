@@ -55,7 +55,9 @@ namespace BLL
             bool retorno = false;
             ConexionDb conexion = new ConexionDb();
 
-            retorno = conexion.Ejecutar(string.Format("Delete from Choferes where ChoferId = {0}",this.ChoferId));
+            retorno = conexion.Ejecutar("Alter table Ventas NOCHECK constraint ALL" + " ; "
+                                        + "Delete from Choferes where ChoferId = " + this.ChoferId + " ; " 
+                                        + "Alter table Ventas CHECK constraint ALL");
 
             return retorno;
         }

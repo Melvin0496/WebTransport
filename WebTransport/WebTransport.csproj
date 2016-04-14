@@ -67,10 +67,13 @@
     <Content Include="bootstrap\js\npm.js" />
     <Content Include="Consultas\cAutobuses.aspx" />
     <Content Include="Consultas\cChoferes.aspx" />
+    <Content Include="Consultas\cMisReservaciones.aspx" />
     <Content Include="Consultas\cParadas.aspx" />
     <Content Include="Consultas\cPasajeros.aspx" />
     <Content Include="Consultas\cReservaciones.aspx" />
+    <Content Include="Consultas\cTipoEnvios.aspx" />
     <Content Include="Consultas\cUsuarios.aspx" />
+    <Content Include="Consultas\cVentas.aspx" />
     <Content Include="Content\bootstrapValidator.min.css" />
     <Content Include="Content\metisMenu.min.css" />
     <Content Include="Content\sb-admin-2.css" />
@@ -875,14 +878,19 @@
     <Content Include="Registros\rParadas.aspx" />
     <Content Include="Registros\rPasajeros.aspx" />
     <Content Include="Registros\rReservaciones.aspx" />
+    <Content Include="Registros\rTipoEnvios.aspx" />
     <Content Include="Registros\rUsuarios.aspx" />
-    <Content Include="Registros\rVentasTickets.aspx" />
-    <Content Include="Script\bootstrapValidator.min.js" />
+    <Content Include="Registros\rVentas.aspx" />
+    <Content Include="Script\jquery-1.7.1.min.js" />
     <Content Include="Script\jquery-2.2.0.min.js" />
+    <Content Include="Script\jquery.validate.js" />
     <Content Include="Script\metisMenu.min.js" />
     <Content Include="Script\toastr.min.js" />
-    <Content Include="SingOut.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Utilidad\Contactanos.aspx" />
+    <Content Include="Utilidad\SingOut.aspx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Consultas\cAutobuses.aspx.cs">
@@ -898,6 +906,13 @@
     </Compile>
     <Compile Include="Consultas\cChoferes.aspx.designer.cs">
       <DependentUpon>cChoferes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Consultas\cMisReservaciones.aspx.cs">
+      <DependentUpon>cMisReservaciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Consultas\cMisReservaciones.aspx.designer.cs">
+      <DependentUpon>cMisReservaciones.aspx</DependentUpon>
     </Compile>
     <Compile Include="Consultas\cParadas.aspx.cs">
       <DependentUpon>cParadas.aspx</DependentUpon>
@@ -920,12 +935,26 @@
     <Compile Include="Consultas\cReservaciones.aspx.designer.cs">
       <DependentUpon>cReservaciones.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Consultas\cTipoEnvios.aspx.cs">
+      <DependentUpon>cTipoEnvios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Consultas\cTipoEnvios.aspx.designer.cs">
+      <DependentUpon>cTipoEnvios.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Consultas\cUsuarios.aspx.cs">
       <DependentUpon>cUsuarios.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Consultas\cUsuarios.aspx.designer.cs">
       <DependentUpon>cUsuarios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Consultas\cVentas.aspx.cs">
+      <DependentUpon>cVentas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Consultas\cVentas.aspx.designer.cs">
+      <DependentUpon>cVentas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -991,6 +1020,13 @@
     <Compile Include="Registros\rReservaciones.aspx.designer.cs">
       <DependentUpon>rReservaciones.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Registros\rTipoEnvios.aspx.cs">
+      <DependentUpon>rTipoEnvios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Registros\rTipoEnvios.aspx.designer.cs">
+      <DependentUpon>rTipoEnvios.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Registros\rUsuarios.aspx.cs">
       <DependentUpon>rUsuarios.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -998,18 +1034,25 @@
     <Compile Include="Registros\rUsuarios.aspx.designer.cs">
       <DependentUpon>rUsuarios.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Registros\rVentasTickets.aspx.cs">
-      <DependentUpon>rVentasTickets.aspx</DependentUpon>
+    <Compile Include="Registros\rVentas.aspx.cs">
+      <DependentUpon>rVentas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Registros\rVentasTickets.aspx.designer.cs">
-      <DependentUpon>rVentasTickets.aspx</DependentUpon>
+    <Compile Include="Registros\rVentas.aspx.designer.cs">
+      <DependentUpon>rVentas.aspx</DependentUpon>
     </Compile>
-    <Compile Include="SingOut.aspx.cs">
+    <Compile Include="Utilidad\Contactanos.aspx.cs">
+      <DependentUpon>Contactanos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilidad\Contactanos.aspx.designer.cs">
+      <DependentUpon>Contactanos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Utilidad\SingOut.aspx.cs">
       <DependentUpon>SingOut.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="SingOut.aspx.designer.cs">
+    <Compile Include="Utilidad\SingOut.aspx.designer.cs">
       <DependentUpon>SingOut.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">

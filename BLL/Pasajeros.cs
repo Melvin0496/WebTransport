@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using DAL;
@@ -9,6 +10,7 @@ namespace BLL
 {
     public class Pasajeros : ClaseMaestra
     {
+        [Browsable(false)]
         public int PasajeroId { get; set; }
         public string Nombres { get; set; }
 
@@ -38,7 +40,7 @@ namespace BLL
             bool retorno = false;
             ConexionDb conexion = new ConexionDb();
 
-            retorno = conexion.Ejecutar(string.Format("Update Pasajeros set Nombres = '{0}' where PasajeroId = {3}", this.Nombres, this.PasajeroId));
+            retorno = conexion.Ejecutar(string.Format("Update Pasajeros set Nombres = '{0}' where PasajeroId = {1}", this.Nombres, this.PasajeroId));
 
             return retorno;
         }
@@ -48,7 +50,9 @@ namespace BLL
             bool retorno = false;
             ConexionDb conexion = new ConexionDb();
 
-            retorno = conexion.Ejecutar(string.Format("Delete from Pasajeros where PasajeroId = {0}", this.PasajeroId));
+            retorno = conexion.Ejecutar("Alter table PasajerosDetalle NOCHECK constraint ALL" + " ; " 
+                                        +"Delete from Pasajeros where PasajeroId = " + this.PasajeroId + " ; " 
+                                        + "Alter table PasajerosDetalle CHECK constraint ALL");
 
             return retorno;
         }

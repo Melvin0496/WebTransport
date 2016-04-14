@@ -49,6 +49,15 @@ namespace WebTransport.Registros {
         protected global::System.Web.UI.WebControls.TextBox LugarTextBox;
         
         /// <summary>
+        /// LugarRequiredFieldValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator LugarRequiredFieldValidator;
+        
+        /// <summary>
         /// CantidadAsientoTextBox control.
         /// </summary>
         /// <remarks>
@@ -56,6 +65,15 @@ namespace WebTransport.Registros {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox CantidadAsientoTextBox;
+        
+        /// <summary>
+        /// CantidadRequiredFieldValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator CantidadRequiredFieldValidator;
         
         /// <summary>
         /// FechaTextBox control.

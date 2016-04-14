@@ -58,13 +58,76 @@ namespace WebTransport {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl UsuariosLi;
         
         /// <summary>
-        /// Melvin control.
+        /// ParadaLi control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Melvin;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ParadaLi;
+        
+        /// <summary>
+        /// ChoferesLi control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ChoferesLi;
+        
+        /// <summary>
+        /// ReservacionesConsultaLi control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ReservacionesConsultaLi;
+        
+        /// <summary>
+        /// MiReservacionesLi control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MiReservacionesLi;
+        
+        /// <summary>
+        /// AutobusesLi control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl AutobusesLi;
+        
+        /// <summary>
+        /// PasajerosLi control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl PasajerosLi;
+        
+        /// <summary>
+        /// TipoEnvioLi control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl TipoEnvioLi;
+        
+        /// <summary>
+        /// VentasLi control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl VentasLi;
         
         /// <summary>
         /// ScriptManager1 control.

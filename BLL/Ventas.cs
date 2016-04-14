@@ -11,7 +11,7 @@ namespace BLL
     {
         public int VentaId { get; set; }
         public int ChoferId { get; set; }
-        public string Fecha { get; set; }
+        public DateTime Fecha { get; set; }
         public int UsuarioId { get; set; }
         public int AutobusId { get; set; }
         public float Total { get; set; }
@@ -22,15 +22,15 @@ namespace BLL
         {
             this.VentaId = 0;
             this.ChoferId = 0;
-            this.Fecha = "";
-            this.UsuarioId = 1;
+            this.Fecha = new DateTime();
+            this.UsuarioId = 0;
             this.AutobusId = 0;
             this.Total = 0.0f;
             this.Envio = new List<Envios>();
             this.Pasajero = new List<Pasajeros>();
         }
 
-        public void AgregarEnvios(string descripcion, string tipoEnvio, float precio, string emisor, string receptor)
+        public void AgregarEnvios(string descripcion, int tipoEnvio, float precio, string emisor, string receptor)
         {
             this.Envio.Add(new Envios(descripcion, tipoEnvio, precio, emisor, receptor));
         }
@@ -82,7 +82,7 @@ namespace BLL
             ConexionDb conexion = new ConexionDb();
             try
             {
-                retorno = conexion.Ejecutar(string.Format("Update Ventas set ChoferId = {0}, Fecha = {1}, UsuarioId = {2}, AutobusId = {3}, Total = {4} where VentaId = {5}",this.ChoferId,this.Fecha,this.UsuarioId,this.AutobusId,this.Total,this.VentaId));
+                retorno = conexion.Ejecutar(string.Format("Update Ventas set ChoferId = {0}, Fecha = '{1}', UsuarioId = {2}, AutobusId = {3}, Total = {4} where VentaId = {5}",this.ChoferId,this.Fecha,this.UsuarioId,this.AutobusId,this.Total,this.VentaId));
                 if (retorno)
                 {
                     conexion.Ejecutar("Delete from EnviosDetalle Where VentaId=" + this.VentaId.ToString());
@@ -138,7 +138,7 @@ namespace BLL
             if (dt.Rows.Count > 0)
             {
                 this.ChoferId = (int)dt.Rows[0]["ChoferId"];
-                this.Fecha = dt.Rows[0]["Fecha"].ToString();
+                this.Fecha = Convert.ToDateTime(dt.Rows[0]["Fecha"]);
                 this.UsuarioId = (int)dt.Rows[0]["UsuarioId"];
                 this.AutobusId = (int)dt.Rows[0]["AutobusId"];
                 this.Total = Convert.ToSingle(dt.Rows[0]["Total"]);
@@ -148,7 +148,7 @@ namespace BLL
                 this.Envio.Clear();
                 foreach (DataRow item in dtVentaDetalle.Rows)
                 {
-                    this.AgregarEnvios(item["Descripcion"].ToString(),item["TipoEnvio"].ToString(),Convert.ToSingle(item["Precio"]),item["Emisor"].ToString(),item["Receptor"].ToString());
+                    this.AgregarEnvios(item["Descripcion"].ToString(),(int)item["TipoEnvio"],Convert.ToSingle(item["Precio"]),item["Emisor"].ToString(),item["Receptor"].ToString());
                 }
             }
 

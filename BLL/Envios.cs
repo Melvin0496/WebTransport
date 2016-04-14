@@ -10,7 +10,7 @@ namespace BLL
     public class Envios
     {
         public string Descripcion { get; set; }
-        public string TipoEnvio { get; set; }
+        public int TipoEnvio { get; set; }
         public float Precio { get; set; }
         public string Emisor { get; set; }
         public string Receptor { get; set; }
@@ -18,13 +18,13 @@ namespace BLL
         public Envios()
         {
             Descripcion = "";
-            TipoEnvio = "";
+            TipoEnvio = 0;
             Precio = 0.0f;
             Emisor = "";
             Receptor = "";
         }
 
-        public Envios(string descripcion, string tipoEnvio, float precio, string emisor, string receptor)
+        public Envios(string descripcion, int tipoEnvio, float precio, string emisor, string receptor)
         {
             this.Descripcion = descripcion;
             this.TipoEnvio = tipoEnvio;

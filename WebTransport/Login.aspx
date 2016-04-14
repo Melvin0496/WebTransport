@@ -44,7 +44,7 @@
                                 </div>
                                 <div class="form-group">
                                     <asp:Label ID="RemenberMeLabel" runat="server">
-                                        <asp:CheckBox ID="RecuerdameCheckBox" runat="server" type="checkbox" /> Remember Me
+                                        <asp:CheckBox ID="RecuerdameCheckBox" runat="server" type="checkbox" /> Remember Me?
                                     </asp:Label>
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->

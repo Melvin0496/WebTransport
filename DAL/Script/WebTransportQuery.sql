@@ -13,10 +13,21 @@ TipoUsuario int,
 Fecha datetime
 )
 
+select *from Paradas
+select *from Usuarios
+select *from Reservaciones
+
 create table Pasajeros(
 PasajeroId int identity(1,1) primary key,
 Nombres varchar(40)
 )
+
+create table TipoEnvios(
+TipoEnvioId int identity(1,1) primary key,
+Descripcion varchar(100)
+)
+
+select *from TipoEnvios
 
 select *from Pasajeros
 
@@ -83,7 +94,7 @@ EnvioId int identity(1,1) primary key,
 ChoferId int references Choferes(ChoferId),
 UsuarioId int references Usuarios(UsuarioId),
 Descripcion varchar(100),
-TipoEnvio varchar(50),
+TipoEnvio int,
 Precio float,
 Emisor varchar(40),
 Receptor varchar(40),
@@ -93,6 +104,9 @@ Fecha datetime
 Drop table Envios
 select *from Envios
 Delete from Envios where EnvioId = 3
+select *from Choferes
+
+select *from Usuarios
 
 Select *from Envios
 
@@ -116,11 +130,13 @@ create table EnviosDetalle(
 Id int identity(1,1) primary key,
 VentaId int references Ventas(VentaId),
 Descripcion varchar(100),
-TipoEnvio varchar(50),
+TipoEnvio int,
 Precio float,
 Emisor varchar(40),
 Receptor varchar(40),
 )
+
+drop table EnviosDetalle
 
 create table PasajerosDetalle(
 Id int identity(1,1) primary key,

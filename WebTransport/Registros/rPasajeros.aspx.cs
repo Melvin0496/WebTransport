@@ -15,6 +15,7 @@ namespace WebTransport.Registros
             if (!IsPostBack)
             {
                 int Id;
+                EliminarButton.Enabled = false;
                 if (Request.QueryString["Id"] != null)
                 {
                     Id = Utilitarios.ToInt(Request.QueryString["Id"].ToString());
@@ -40,7 +41,9 @@ namespace WebTransport.Registros
 
         public void Limpiar()
         {
+            PasajeroIdTextBox.Text = string.Empty;
             NombresTextBox.Text = string.Empty;
+            EliminarButton.Enabled = false;
         }
 
         public void LlenarDatos(Pasajeros pasajero)
@@ -62,9 +65,10 @@ namespace WebTransport.Registros
         {
             Pasajeros pasajeros = new Pasajeros();
 
-            LlenarDatos(pasajeros);
+
             if (PasajeroIdTextBox.Text.Length == 0)
             {
+                LlenarDatos(pasajeros);
                 if (pasajeros.Insertar())
                 {
                     Utilitarios.ShowToastr(this, "Transaccion exitosa!!!", "Mensaje", "Success");
@@ -78,16 +82,25 @@ namespace WebTransport.Registros
             else
             {
                 pasajeros.PasajeroId = Utilitarios.ToInt(PasajeroIdTextBox.Text);
-                if (pasajeros.Editar())
+                if (pasajeros.PasajeroId > 0)
                 {
-                    Utilitarios.ShowToastr(this, "Transaccion exitosa!!!", "Mensaje", "Success");
-                    Limpiar();
-                }
-                else
-                {
-                    Utilitarios.ShowToastr(this, "Error al editar", "Error", "Danger");
+                    if (pasajeros.Buscar(pasajeros.PasajeroId))
+                    {
+                        LlenarDatos(pasajeros);
+                        if (pasajeros.Editar())
+                        {
+                            Utilitarios.ShowToastr(this, "Transaccion exitosa!!!", "Mensaje", "Success");
+                            Limpiar();
+                        }
+                    }
+                    else
+                    {
+                        Response.Write("<SCRIPT>alert('No se pudo editar...ID incorrecto')</SCRIPT>");
+                        Limpiar();
+                    }
                 }
             }
+
         }
 
         protected void BuscarButton_Click(object sender, EventArgs e)
@@ -96,20 +109,54 @@ namespace WebTransport.Registros
 
             if (PasajeroIdTextBox.Text.Length == 0)
             {
-                Utilitarios.ShowToastr(this, "Seleccione un ID", "Alerta", "Warning");
+                Utilitarios.ShowToastr(this, "Introduzca un ID", "Alerta", "Warning");
             }
             else
             {
-                if (pasajero.Buscar(Utilitarios.ToInt(PasajeroIdTextBox.Text)))
+                pasajero.PasajeroId = Utilitarios.ToInt(PasajeroIdTextBox.Text);
+                if (pasajero.PasajeroId > 0)
                 {
-                    DevolverDatos(pasajero);
-                }
-                else 
-                {
-                    Utilitarios.ShowToastr(this, "No existe ese ID", "Error", "Danger");
+                    if (pasajero.Buscar(pasajero.PasajeroId))
+                    {
+                        DevolverDatos(pasajero);
+                        EliminarButton.Enabled = true;
+                    }
+                    else
+                    {
+                        Response.Write("<SCRIPT>alert('ID no encontrado')</SCRIPT>");
+                        Limpiar();
+                    }
                 }
             }
 
+        }
+
+        protected void EliminarButton_Click(object sender, EventArgs e)
+        {
+            Pasajeros pasajero = new Pasajeros();
+
+            if (PasajeroIdTextBox.Text.Length == 0)
+            {
+                Utilitarios.ShowToastr(this, "Introduzca un ID", "Alerta", "Warning");
+            }
+            else
+            {
+                pasajero.PasajeroId = Utilitarios.ToInt(PasajeroIdTextBox.Text);
+                if (pasajero.PasajeroId > 0)
+                {
+                    if (pasajero.Buscar(pasajero.PasajeroId))
+                    {
+                        pasajero.Eliminar();
+                        Utilitarios.ShowToastr(this, "Transaccion exitosa!!!", "Mensaje", "Success");
+                        Limpiar();
+                    }
+                    else
+                    {
+                        Response.Write("<SCRIPT>alert('ID incorrecto')</SCRIPT>");
+                        Limpiar();
+                    }
+                }
+            }
         }
     }
 }

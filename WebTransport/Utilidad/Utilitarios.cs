@@ -27,5 +27,14 @@ namespace WebTransport
             float.TryParse(campo, out variable);
             return variable;
         }
+
+        public static DateTime ToDatetime(string campo)
+        {
+            DateTime dt;
+
+            DateTime.TryParse(campo, out dt);
+
+            return dt;
+        }
     }
 }

@@ -18,7 +18,7 @@ namespace PruebaDeMelvin
 
         protected void RegistrarButton_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Registrar.aspx");
+            Response.Redirect("/Registrar.aspx");
         }
 
         protected void LoginButton_Click(object sender, EventArgs e)

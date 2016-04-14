@@ -28,12 +28,23 @@ namespace WebTransport
                 {
                     UserControl();
                 }
+                else
+                {
+                    MiReservacionesLi.Visible = false;
+                }
             }
         }
 
         public void UserControl()
         {
             UsuariosLi.Visible = false;
+            PasajerosLi.Visible = false;
+            VentasLi.Visible = false;
+            ChoferesLi.Visible = false;
+            ParadaLi.Visible = false;
+            AutobusesLi.Visible = false;
+            TipoEnvioLi.Visible = false;
+            ReservacionesConsultaLi.Visible = false;
         }
 
     }

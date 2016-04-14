@@ -14,7 +14,8 @@
                 <div class="form-group">
                     <label for="PasajeroIdTextBox" class="col-md-3 control-label input-sm">PasajeroId: </label>
                     <div class="col-md-4 col-sm-2 col-xs-4">
-                        <asp:TextBox ID="PasajeroIdTextBox" runat="server" placeholder="0" class="form-control input-sm" type="number"></asp:TextBox>
+                        <asp:TextBox ID="PasajeroIdTextBox" runat="server" placeholder="Introduzca un ID aqui" class="form-control input-sm" type="number"></asp:TextBox>
+                        <asp:RangeValidator ID="PasajeroIdRangeValidator" runat="server" ErrorMessage="Solo Numeros" Font-Bold="True" ControlToValidate="PasajeroIdTextBox" Display="Dynamic" Type="Integer" MaximumValue="2000" MinimumValue="1"></asp:RangeValidator>
                     </div>
                     <div class="col-md-1 col-sm-2 col-xs-4">
                         <asp:Button ID="BuscarButton" runat="server" class="btn btn-info btn-md" Text="Buscar" OnClick="BuscarButton_Click" />
@@ -29,7 +30,8 @@
                 <div class="form-group">
                     <label for="NombresTextBox" class="col-md-3 control-label input-sm">Nombres: </label>
                     <div class="col-md-5">
-                        <asp:TextBox ID="NombresTextBox" runat="server" Class="form-control input-sm" placeholder="'Melvin Santiago'"></asp:TextBox>
+                        <asp:TextBox ID="NombresTextBox" runat="server" Class="form-control input-sm" placeholder="(Requerido)" MaxLength="40"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="NombresRequiredFieldValidator" runat="server" ErrorMessage="No puede dejar este campo vacío" ValidationGroup="PasajerosForm" ControlToValidate="NombresTextBox" Display="Dynamic" Font-Bold="True" ForeColor="Red"></asp:RequiredFieldValidator>
                     </div>
                     <div class="col-md-1">
                     </div>
@@ -41,8 +43,8 @@
                         <div class="form-group" style="display: inline-block">
 
                             <asp:Button Text="Nuevo  " class="btn btn-warning btn-md" runat="server" ID="NuevoButton" OnClick="NuevoButton_Click" />
-                            <asp:Button Text="Guardar" class="btn btn-primary btn-md" runat="server" ID="GuadarButton" OnClick="GuadarButton_Click" />
-                            <asp:Button Text="Eliminar" class="btn btn-danger btn-md" runat="server" ID="EliminarButton" />
+                            <asp:Button Text="Guardar" class="btn btn-primary btn-md" runat="server" ID="GuadarButton" OnClick="GuadarButton_Click" ValidationGroup="PasajerosForm" />
+                            <asp:Button Text="Eliminar" class="btn btn-danger btn-md" runat="server" ID="EliminarButton" OnClick="EliminarButton_Click" />
 
                         </div>
                     </div>

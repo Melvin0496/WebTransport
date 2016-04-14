@@ -40,6 +40,15 @@ namespace WebTransport.Registros {
         protected global::System.Web.UI.WebControls.TextBox NombresTextBox;
         
         /// <summary>
+        /// NombresRequiredFieldValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator NombresRequiredFieldValidator;
+        
+        /// <summary>
         /// ApellidosTextBox control.
         /// </summary>
         /// <remarks>
@@ -49,22 +58,49 @@ namespace WebTransport.Registros {
         protected global::System.Web.UI.WebControls.TextBox ApellidosTextBox;
         
         /// <summary>
-        /// EmailTextBox control.
+        /// ApellidosRequiredFieldValidator control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox EmailTextBox;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ApellidosRequiredFieldValidator;
         
         /// <summary>
-        /// ContrasenaTextBox control.
+        /// REmailTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ContrasenaTextBox;
+        protected global::System.Web.UI.WebControls.TextBox REmailTextBox;
+        
+        /// <summary>
+        /// EmailRequiredFieldValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator EmailRequiredFieldValidator;
+        
+        /// <summary>
+        /// RContrasenaTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox RContrasenaTextBox;
+        
+        /// <summary>
+        /// ContrasenaRequiredFieldValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ContrasenaRequiredFieldValidator;
         
         /// <summary>
         /// TipoUsuarioDropDownList control.

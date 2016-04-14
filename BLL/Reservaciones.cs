@@ -13,7 +13,7 @@ namespace BLL
         public int UsuarioId { get; set; }
         public string Lugar { get; set; }
         public int CantidadAsientos { get; set; }
-        public string Fecha { get; set; }
+        public DateTime Fecha { get; set; }
         public int esActiva { get; set; }
 
         public Reservaciones()
@@ -22,7 +22,7 @@ namespace BLL
             UsuarioId = 0;
             Lugar = "";
             CantidadAsientos = 0;
-            Fecha = "";
+            Fecha = new DateTime();
             esActiva = 0;
         }
 
@@ -31,7 +31,7 @@ namespace BLL
             bool retorno = false;
             ConexionDb conexion = new ConexionDb();
 
-            retorno = conexion.Ejecutar(string.Format("Insert into Reservaciones(UsuarioId,Lugar,CantidadAsiento,Fecha,esActiva) values({0},'{1}',{2},'{3}',{4})",this.UsuarioId,this.Lugar,this.CantidadAsientos,this.Fecha,this.esActiva));
+            retorno = conexion.Ejecutar(string.Format("Insert into Reservaciones(UsuarioId,Lugar,CantidadAsiento,Fecha,esActiva) values({0},'{1}',{2},'{3}',{4})",this.UsuarioId,this.Lugar,this.CantidadAsientos,this.Fecha.ToString("yyyy-MM-dd"),this.esActiva));
 
             return retorno;
         }
@@ -41,7 +41,7 @@ namespace BLL
             bool retorno = false;
             ConexionDb conexion = new ConexionDb();
 
-            retorno = conexion.Ejecutar(string.Format("Update Reservaciones set UsuarioId = {0}, Lugar = '{1}', CantidadAsiento = {2}, Fecha = '{3}' esActiva = {4} where ResevacionId = {5}", this.UsuarioId, this.Lugar, this.CantidadAsientos, this.Fecha, this.esActiva,this.ReservacionId));
+            retorno = conexion.Ejecutar(string.Format("Update Reservaciones set UsuarioId = {0}, Lugar = '{1}', CantidadAsiento = {2}, Fecha = '{3}' esActiva = {4} where ResevacionId = {5}", this.UsuarioId, this.Lugar, this.CantidadAsientos,this.Fecha,this.esActiva,this.ReservacionId));
 
             return retorno;
         }
@@ -69,7 +69,7 @@ namespace BLL
                 this.UsuarioId = (int)dt.Rows[0]["UsuarioId"];
                 this.Lugar = dt.Rows[0]["Lugar"].ToString();
                 this.CantidadAsientos = (int)dt.Rows[0]["CantidadAsiento"];
-                this.Fecha = dt.Rows[0]["Fecha"].ToString();
+                this.Fecha = Convert.ToDateTime(dt.Rows[0]["Fecha"]);
                 this.esActiva = Convert.ToInt32(dt.Rows[0]["esActiva"]);
             }
 
@@ -88,6 +88,13 @@ namespace BLL
 
             return conexion.ObtenerDatos("Select " + Campos + "From Reservaciones where " 
                                             + Condicion + " " + ordenFinal);
+        }
+
+        public DataTable Listado(int id)
+        {
+            ConexionDb conexion = new ConexionDb();
+
+            return conexion.ObtenerDatos("Select r.Lugar, r.CantidadAsiento, r.Fecha, r.esActiva, u.Nombres from Reservaciones r inner join Usuarios u on r.UsuarioId = u.UsuarioId where u.UsuarioId = " + id);
         }
     }
 }

@@ -40,16 +40,23 @@ namespace WebTransport
 
             if (PasswordTextBox.Text == ComfirmPasswordTextBox.Text)
             {
-                LlenarDatos(usuario);
-
-                if (usuario.Insertar())
+                if (NombresTextBox.Text == string.Empty || ApellidosTextBox.Text == string.Empty || EmailTextBox.Text == string.Empty || PasswordTextBox.Text == string.Empty || ComfirmPasswordTextBox.Text == string.Empty)
                 {
-                    Utilitarios.ShowToastr(this, "Registrado correctamente", "Mensaje", "Success");
-                    Response.Redirect("Login.aspx");
+                    Utilitarios.ShowToastr(this, "Debe llenar todos los campos", "Alerta", "Warning");
                 }
                 else
                 {
-                    Utilitarios.ShowToastr(this, "Error al registrar", "Error", "Danger");
+                    LlenarDatos(usuario);
+
+                    if (usuario.Insertar())
+                    {
+                        Utilitarios.ShowToastr(this, "Registrado correctamente", "Mensaje", "Success");
+                        Response.Redirect("/Login.aspx");
+                    }
+                    else
+                    {
+                        Utilitarios.ShowToastr(this, "Error al registrar", "Error", "Danger");
+                    }
                 }
             }
             else
@@ -60,7 +67,7 @@ namespace WebTransport
 
         protected void CancelarButton_Click1(object sender, EventArgs e)
         {
-            Response.Redirect("Login.aspx");
+            Response.Redirect("/Login.aspx");
         }
     }
 }

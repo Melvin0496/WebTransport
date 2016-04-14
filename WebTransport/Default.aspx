@@ -16,19 +16,19 @@
                   <!-- Wrapper for slides -->
                   <div class="carousel-inner" role="listbox">
                     <div class="item active">
-                      <img src="./Imagenes/imagen1.jpg" alt="Chania" />
+                      <img src="./Imagenes/imagen1.jpg" alt="Autobus1" />
                     </div>
 
                     <div class="item">
-                      <img src="./Imagenes/imagen2.jpg" alt="Chania" />
+                      <img src="./Imagenes/imagen2.jpg" alt="Autobus2" />
                     </div>
 
                     <div class="item">
-                      <img src="./Imagenes/imagen3.jpg" alt="Flower" />
+                      <img src="./Imagenes/imagen3.jpg" alt="Autobus3" />
                     </div>
 
                     <div class="item">
-                      <img src="./Imagenes/imagen4.jpg" alt="Flower" />
+                      <img src="./Imagenes/imagen4.jpg" alt="Autobus4" />
                     </div>
                   </div>
 

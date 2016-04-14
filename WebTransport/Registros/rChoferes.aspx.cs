@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Text.RegularExpressions;
 using BLL;
 
 namespace WebTransport.Registros
@@ -14,7 +15,12 @@ namespace WebTransport.Registros
         {
             if (!IsPostBack)
             {
+                //if (AutobusIdDropDownList.Items.Count == 0)
+                //{
+                //    Response.Redirect("/Registros/rAutobuses.aspx");
+                //}
                 LlenarDropDownList();
+                EliminarButton.Enabled = false;
                 int Id;
                 if (Request.QueryString["Id"] != null)
                 {
@@ -58,6 +64,7 @@ namespace WebTransport.Registros
             CedulaTextBox.Text = string.Empty;
             AnoServicioTextBox.Text = string.Empty;
             TelefonoTextBox.Text = string.Empty;
+            EliminarButton.Enabled = false;
         }
 
         public void LlenarCampos(Choferes chofer)
@@ -66,7 +73,7 @@ namespace WebTransport.Registros
             chofer.Nombres = NombresTextBox.Text;
             chofer.Apellidos = ApellidosTextBox.Text;
             chofer.Cedula = CedulaTextBox.Text;
-            chofer.AnosServicios = Convert.ToInt32(AnoServicioTextBox.Text);
+            chofer.AnosServicios = Utilitarios.ToInt(AnoServicioTextBox.Text);
             chofer.Telefono = TelefonoTextBox.Text;
         }
 
@@ -77,7 +84,7 @@ namespace WebTransport.Registros
             ApellidosTextBox.Text = chofer.Apellidos;
             CedulaTextBox.Text = chofer.Cedula;
             AnoServicioTextBox.Text = chofer.AnosServicios.ToString();
-            TelefonoTextBox.Text = chofer.Telefono; 
+            TelefonoTextBox.Text = chofer.Telefono;
         }
 
         protected void NuevoButton_Click(object sender, EventArgs e)
@@ -89,32 +96,38 @@ namespace WebTransport.Registros
         {
             Choferes chofer = new Choferes();
 
-            if(ChoferIdTextBox.Text.Length == 0)
+            if (ChoferIdTextBox.Text.Length == 0)
             {
                 LlenarCampos(chofer);
                 if (chofer.Insertar())
-                {
-                    Utilitarios.ShowToastr(this,"Transaccion exitosa","Mensaje","Success");
-                    Limpiar();
-                }
-                else
-                {
-                    Utilitarios.ShowToastr(this, "Error al insertar", "Error", "Danger");
-                }
-
-            }
-            else
-            {
-                LlenarCampos(chofer);
-                chofer.ChoferId = Utilitarios.ToInt(ChoferIdTextBox.Text);
-                if (chofer.Editar())
                 {
                     Utilitarios.ShowToastr(this, "Transaccion exitosa", "Mensaje", "Success");
                     Limpiar();
                 }
                 else
                 {
-                    Utilitarios.ShowToastr(this, "Error al editar", "Error", "Danger");
+                    Utilitarios.ShowToastr(this, "Error al insertar", "Error", "Danger");
+                }
+            }
+            else
+            {
+                chofer.ChoferId = Utilitarios.ToInt(ChoferIdTextBox.Text);
+                if (chofer.ChoferId > 0)
+                {
+                    if (chofer.Buscar(chofer.ChoferId))
+                    {
+                        LlenarCampos(chofer);
+                        if (chofer.Editar())
+                        {
+                            Utilitarios.ShowToastr(this, "Transaccion exitosa", "Mensaje", "Success");
+                            Limpiar();
+                        }
+                    }
+                    else
+                    {
+                        Response.Write("<SCRIPT>alert('No se pudo editar...ID incorrecto')</SCRIPT>");
+                        Limpiar();
+                    }
                 }
             }
         }
@@ -123,21 +136,26 @@ namespace WebTransport.Registros
         {
             Choferes chofer = new Choferes();
 
-            if(ChoferIdTextBox.Text.Length == 0)
+            if (ChoferIdTextBox.Text.Length == 0)
             {
-                Utilitarios.ShowToastr(this, "Selecciona un id", "Alerta", "Warning");
+                Utilitarios.ShowToastr(this, "Introduzca un id", "Alerta", "Warning");
             }
             else
             {
-                chofer.ChoferId =  Utilitarios.ToInt(ChoferIdTextBox.Text);
-                if (chofer.Eliminar())
+                chofer.ChoferId = Utilitarios.ToInt(ChoferIdTextBox.Text);
+                if (chofer.ChoferId > 0)
                 {
-                    Utilitarios.ShowToastr(this, "Transaccion exitosa", "Mensaje", "Success");
-                    Limpiar();
-                }
-                else
-                {
-                    Utilitarios.ShowToastr(this, "Error al eliminar", "Error", "Danger");
+                    if (chofer.Buscar(chofer.ChoferId))
+                    {
+                        chofer.Eliminar();
+                        Utilitarios.ShowToastr(this, "Transaccion exitosa", "Mensaje", "Success");
+                        Limpiar();
+                    }
+                    else
+                    {
+                        Response.Write("<SCRIPT>alert('ID incorrecto')</SCRIPT>");
+                        Limpiar();
+                    }
                 }
             }
         }
@@ -148,18 +166,23 @@ namespace WebTransport.Registros
 
             if (ChoferIdTextBox.Text.Length == 0)
             {
-                Utilitarios.ShowToastr(this, "Selecciona un id", "Alerta", "Warning");
+                Utilitarios.ShowToastr(this, "Introduzaca un id", "Alerta", "Warning");
             }
             else
             {
-                
-                if (chofer.Buscar(Utilitarios.ToInt(ChoferIdTextBox.Text)))
+                chofer.ChoferId = Utilitarios.ToInt(ChoferIdTextBox.Text);
+                if (chofer.ChoferId > 0)
                 {
-                    DevolverDatos(chofer);
-                }
-                else
-                {
-                    Utilitarios.ShowToastr(this, "Error al buscar", "Error", "Danger");
+                    if (chofer.Buscar(chofer.ChoferId))
+                    {
+                        DevolverDatos(chofer);
+                        EliminarButton.Enabled = true;
+                    }
+                    else
+                    {
+                        Response.Write("<SCRIPT>alert('ID no encontrado')</SCRIPT>");
+                        Limpiar();
+                    }
                 }
             }
         }

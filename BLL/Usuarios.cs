@@ -15,7 +15,7 @@ namespace BLL
         public string Email { get; set; }
         public string Contrasena { get; set; }
         public int TipoUsuario { get; set; }
-        public DateTime FechaNacimiento { get; set; }
+        public string FechaNacimiento { get; set; }
 
         public Usuarios()
         {
@@ -25,6 +25,7 @@ namespace BLL
             this.Email = "";
             this.Contrasena = "";
             this.TipoUsuario = 0;
+            this.FechaNacimiento = DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss");
         }
         public bool Accder()
         {
@@ -43,7 +44,14 @@ namespace BLL
         {
             ConexionDb conexion = new ConexionDb();
 
-            return conexion.ObtenerDatos("Select TipoUsuario from Usuarios where Email = '" + email +"'");
+            return conexion.ObtenerDatos("Select TipoUsuario from Usuarios where Email = '" + email + "'");
+        }
+
+        public DataTable ObtenerUsuario(string email)
+        {
+            ConexionDb conexion = new ConexionDb();
+
+            return conexion.ObtenerDatos("Select UsuarioId from Usuarios where Email = '" + email + "'");
         }
 
         public override bool Insertar()
@@ -51,7 +59,7 @@ namespace BLL
             bool retorno = false;
             ConexionDb conexion = new ConexionDb();
 
-            retorno = conexion.Ejecutar(string.Format("Insert into Usuarios(Nombres,Apellidos,Email,Contrasena,TipoUsuario) values('{0}','{1}','{2}','{3}',{4})",this.Nombres,this.Apellidos,this.Email,this.Contrasena,this.TipoUsuario));
+            retorno = conexion.Ejecutar(string.Format("Insert into Usuarios(Nombres,Apellidos,Email,Contrasena,TipoUsuario,Fecha) values('{0}','{1}','{2}','{3}',{4},'{5}')",this.Nombres,this.Apellidos,this.Email,this.Contrasena,this.TipoUsuario,this.FechaNacimiento));
 
             return retorno;
         }
@@ -61,7 +69,7 @@ namespace BLL
             bool retorno = false;
             ConexionDb conexion = new ConexionDb();
 
-            retorno = conexion.Ejecutar(String.Format("Update Usuarios Set Nombres = '{0}', Apellidos = '{1}', Email = '{2}', Contrasena = '{3}', TipoUsuario = {4}, Fecha = '{5}' Where UsuarioId = {6}", this.Nombres, this.Apellidos, this.Email, this.Contrasena, this.TipoUsuario, this.FechaNacimiento, this.UsuarioId));
+            retorno = conexion.Ejecutar(string.Format("Update Usuarios Set Nombres = '{0}', Apellidos = '{1}', Email = '{2}', Contrasena = '{3}', TipoUsuario = {4} Where UsuarioId = {5}", this.Nombres, this.Apellidos, this.Email, this.Contrasena, this.TipoUsuario, this.UsuarioId));
 
             return retorno;
         }
@@ -71,7 +79,9 @@ namespace BLL
             bool retorno = false;
             ConexionDb conexion = new ConexionDb();
 
-            retorno = conexion.Ejecutar(String.Format("Delete from Usuarios where UsuarioId = {0}",this.UsuarioId));
+            retorno = conexion.Ejecutar("Alter table Reservaciones NOCHECK constraint ALL" + " ; " 
+                                        +"Delete from Usuarios where UsuarioId = " + this.UsuarioId + " ; "
+                                        + "Alter table Reservaciones CHECK constraint ALL");
 
             return retorno;
         }
@@ -90,7 +100,7 @@ namespace BLL
                 this.Email = dt.Rows[0]["Email"].ToString();
                 this.Contrasena = dt.Rows[0]["Contrasena"].ToString();
                 this.TipoUsuario = (int)dt.Rows[0]["TipoUsuario"];
-                //this.FechaNacimiento = (DateTime)dt.Rows[0]["Fecha"];
+                this.FechaNacimiento = dt.Rows[0]["Fecha"].ToString();
             }
 
             return dt.Rows.Count > 0;
@@ -108,25 +118,6 @@ namespace BLL
 
             return conexion.ObtenerDatos("Select " +Campos+ " from Usuarios where " 
                                         +Condicion+ " " +Orden);
-        }
-
-        public int ControlUsuario()
-        {
-            ConexionDb conexion = new ConexionDb();
-            DataTable dt = new DataTable();
-            int retorno = 0;
-
-            dt = conexion.ObtenerDatos("Select TipoUsuario from Usuarios");
-
-            if(dt.Rows.Count > 0)
-            {
-                this.TipoUsuario = (int)dt.Rows[0]["TipoUsuario"];
-                retorno = 1;
-            }
-
-            return retorno;
-
-           
         }
     }
 }
