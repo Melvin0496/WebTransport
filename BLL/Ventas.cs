@@ -50,7 +50,7 @@ namespace BLL
 
                 identity = conexion.ObtenerValor(
                     string.Format("Insert Into Ventas(ChoferId,Fecha,UsuarioId,AutobusId,Total) values({0},'{1}',{2},{3},{4}) select @@Identity"
-                    , this.ChoferId, this.Fecha, this.UsuarioId, this.AutobusId, this.Total));
+                    , this.ChoferId, this.Fecha.ToString("yyyy-MM-dd"), this.UsuarioId, this.AutobusId, this.Total));
 
 
                 int.TryParse(identity.ToString(), out retorno);
@@ -82,7 +82,7 @@ namespace BLL
             ConexionDb conexion = new ConexionDb();
             try
             {
-                retorno = conexion.Ejecutar(string.Format("Update Ventas set ChoferId = {0}, Fecha = '{1}', UsuarioId = {2}, AutobusId = {3}, Total = {4} where VentaId = {5}",this.ChoferId,this.Fecha,this.UsuarioId,this.AutobusId,this.Total,this.VentaId));
+                retorno = conexion.Ejecutar(string.Format("Update Ventas set ChoferId = {0}, Fecha = '{1}', UsuarioId = {2}, AutobusId = {3}, Total = {4} where VentaId = {5}",this.ChoferId,this.Fecha.ToString("yyyy-MM-dd"),this.UsuarioId,this.AutobusId,this.Total,this.VentaId));
                 if (retorno)
                 {
                     conexion.Ejecutar("Delete from EnviosDetalle Where VentaId=" + this.VentaId.ToString());

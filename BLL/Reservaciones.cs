@@ -41,7 +41,7 @@ namespace BLL
             bool retorno = false;
             ConexionDb conexion = new ConexionDb();
 
-            retorno = conexion.Ejecutar(string.Format("Update Reservaciones set UsuarioId = {0}, Lugar = '{1}', CantidadAsiento = {2}, Fecha = '{3}' esActiva = {4} where ResevacionId = {5}", this.UsuarioId, this.Lugar, this.CantidadAsientos,this.Fecha,this.esActiva,this.ReservacionId));
+            retorno = conexion.Ejecutar(string.Format("Update Reservaciones set UsuarioId = {0}, Lugar = '{1}', CantidadAsiento = {2}, Fecha = '{3}' esActiva = {4} where ResevacionId = {5}", this.UsuarioId, this.Lugar, this.CantidadAsientos,this.Fecha.ToString("yyyy-MM-dd"),this.esActiva,this.ReservacionId));
 
             return retorno;
         }
