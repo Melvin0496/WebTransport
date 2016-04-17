@@ -50,7 +50,7 @@
                 <div class="form-group">
                     <label for="CantidadAsientoTextBox" class="col-md-3 control-label input-sm">Cantidad de Asientos: </label>
                     <div class="col-md-5">
-                        <asp:TextBox ID="CantidadAsientoTextBox" runat="server" Class="form-control input-sm" placeholder="(Requerido)" MaxLength="2"></asp:TextBox>
+                        <asp:TextBox ID="CantidadAsientoTextBox" runat="server" Class="form-control input-sm" placeholder="(Requerido)" MaxLength="2" type="number"></asp:TextBox>
                        <asp:RequiredFieldValidator ID="CantidadRequiredFieldValidator" runat="server" ErrorMessage="No puede dejar este campo vacío" ValidationGroup="ReservacionForm" ControlToValidate="CantidadAsientoTextBox" Display="Dynamic" Font-Bold="True" ForeColor="Red"></asp:RequiredFieldValidator>
 
                     </div>

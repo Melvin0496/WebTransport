@@ -20,23 +20,28 @@ namespace WebTransport.Consultas
         {
             string condicion;
             Reservaciones reservacion = new Reservaciones();
-            if (CamposTextBox.Text.Trim().Length == 0)
+
+            if (CamposCheckBox.Checked)
             {
-                condicion = " 1=1 ";
-            }
-            else
-            {
-                if (CamposDropDownList.SelectedIndex == 0)
+                if (CamposTextBox.Text.Trim().Length == 0)
+                {
+                    condicion = " 1=1 ";
+                }
+
+                else
                 {
                     condicion = CamposDropDownList.SelectedItem.Text + " = " + CamposTextBox.Text;
                 }
-                else
-                {
-                    condicion = CamposDropDownList.SelectedItem.Text + " like " + "'%" + CamposTextBox.Text + "%'";
-                }
+                DatosGridView.DataSource = reservacion.Listado(" * ", condicion, " ");
+                DatosGridView.DataBind();
             }
-            DatosGridView.DataSource = reservacion.Listado(" * ", condicion, " ");
-            DatosGridView.DataBind();
+            else if (FechaCheckBox.Checked)
+            {
+                condicion = "Fecha between '" + FechaDesdeTextBox.Text + "' and '" + FechaHastaTextBox.Text + "'";
+
+                DatosGridView.DataSource = reservacion.Listado(" * ", condicion, " ");
+                DatosGridView.DataBind();
+            }
         }
     }
 }

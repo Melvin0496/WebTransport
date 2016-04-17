@@ -15,7 +15,6 @@
                     <label for="PasajeroIdTextBox" class="col-md-3 control-label input-sm">PasajeroId: </label>
                     <div class="col-md-4 col-sm-2 col-xs-4">
                         <asp:TextBox ID="PasajeroIdTextBox" runat="server" placeholder="Introduzca un ID aqui" class="form-control input-sm" type="number"></asp:TextBox>
-                        <asp:RangeValidator ID="PasajeroIdRangeValidator" runat="server" ErrorMessage="Solo Numeros" Font-Bold="True" ControlToValidate="PasajeroIdTextBox" Display="Dynamic" Type="Integer" MaximumValue="2000" MinimumValue="1"></asp:RangeValidator>
                     </div>
                     <div class="col-md-1 col-sm-2 col-xs-4">
                         <asp:Button ID="BuscarButton" runat="server" class="btn btn-info btn-md" Text="Buscar" OnClick="BuscarButton_Click" />

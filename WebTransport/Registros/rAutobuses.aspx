@@ -29,7 +29,7 @@
                 <div class="form-group">
                     <label for="FichaTextBox" class="col-md-3 control-label input-sm">Ficha: </label>
                     <div class="col-md-5">
-                        <asp:TextBox ID="FichaTextBox" runat="server" Class="form-control input-sm" placeholder="(Requerido)"></asp:TextBox>
+                        <asp:TextBox ID="FichaTextBox" runat="server" Class="form-control input-sm" placeholder="(Requerido)" MaxLength="6"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="FichaRequiredFieldValidator" runat="server" ErrorMessage="No puede dejar este campo vacío" ValidationGroup="AutobusesForm" ControlToValidate="FichaTextBox" ForeColor="Red" Display="Dynamic" Font-Bold="True"></asp:RequiredFieldValidator>
 
                     </div>

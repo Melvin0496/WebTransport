@@ -76,6 +76,15 @@ namespace WebTransport.Registros {
         protected global::System.Web.UI.WebControls.TextBox DescripcionTextBox;
         
         /// <summary>
+        /// DescripcionRequiredFieldValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator DescripcionRequiredFieldValidator;
+        
+        /// <summary>
         /// TipoEnvioDropDownList control.
         /// </summary>
         /// <remarks>
@@ -94,6 +103,15 @@ namespace WebTransport.Registros {
         protected global::System.Web.UI.WebControls.TextBox PrecioTextBox;
         
         /// <summary>
+        /// PrecioRequiredFieldValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator PrecioRequiredFieldValidator;
+        
+        /// <summary>
         /// EmisorTextBox control.
         /// </summary>
         /// <remarks>
@@ -103,6 +121,15 @@ namespace WebTransport.Registros {
         protected global::System.Web.UI.WebControls.TextBox EmisorTextBox;
         
         /// <summary>
+        /// EmisorRequiredFieldValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator EmisorRequiredFieldValidator;
+        
+        /// <summary>
         /// ReceptorTextBox control.
         /// </summary>
         /// <remarks>
@@ -110,6 +137,15 @@ namespace WebTransport.Registros {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox ReceptorTextBox;
+        
+        /// <summary>
+        /// ReceptorRequiredFieldValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ReceptorRequiredFieldValidator;
         
         /// <summary>
         /// AgregarButton control.

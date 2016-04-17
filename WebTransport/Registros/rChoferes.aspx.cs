@@ -15,11 +15,12 @@ namespace WebTransport.Registros
         {
             if (!IsPostBack)
             {
-                //if (AutobusIdDropDownList.Items.Count == 0)
-                //{
-                //    Response.Redirect("/Registros/rAutobuses.aspx");
-                //}
                 LlenarDropDownList();
+                if (AutobusIdDropDownList.Items.Count == 0)
+                {
+                    Response.Redirect("/Registros/rAutobuses.aspx");
+                }
+
                 EliminarButton.Enabled = false;
                 int Id;
                 if (Request.QueryString["Id"] != null)

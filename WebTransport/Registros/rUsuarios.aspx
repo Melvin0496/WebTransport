@@ -53,7 +53,7 @@
                 <div class="form-group">
                     <label for="REmailTextBox" class="col-md-3 control-label input-sm">Email: </label>
                     <div class="col-md-5">
-                        <asp:TextBox ID="REmailTextBox" runat="server" Class="form-control input-sm" placeholder="(Requerido)" type="email"></asp:TextBox>
+                        <asp:TextBox ID="REmailTextBox" runat="server" Class="form-control input-sm" placeholder="(Requerido)" type="email" MaxLength="100" autocomplete="false"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="EmailRequiredFieldValidator" runat="server" ErrorMessage="No puede dejar este campo vacío" ValidationGroup="UsuarioForm" ControlToValidate="REmailTextBox" Display="Dynamic" Font-Bold="True" ForeColor="Red"></asp:RequiredFieldValidator>
 
                     </div>
@@ -67,7 +67,7 @@
                 <div class="form-group">
                     <label for="RContrasenaTextBox" class="col-md-3 control-label input-sm">Contraseña: </label>
                     <div class="col-md-5">
-                        <asp:TextBox ID="RContrasenaTextBox" runat="server" class="form-control input-sm" placeholder="(Requerido)" type="password" MaxLength="30"></asp:TextBox>
+                        <asp:TextBox ID="RContrasenaTextBox" runat="server" class="form-control input-sm" placeholder="(Requerido)" type="password" MaxLength="30" autocomplete="false"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="ContrasenaRequiredFieldValidator" runat="server" ErrorMessage="No puede dejar este campo vacío" ValidationGroup="UsuarioForm" ControlToValidate="RContrasenaTextBox" Display="Dynamic" Font-Bold="True" ForeColor="Red"></asp:RequiredFieldValidator>
                     </div>
                     <div class="col-md-1">

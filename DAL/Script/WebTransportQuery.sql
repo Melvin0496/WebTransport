@@ -109,6 +109,11 @@ select *from Choferes
 select *from Usuarios
 
 Select *from Envios
+delete from Autobuses
+delete from Choferes
+delete from Ventas
+delete from EnviosDetalle
+delete from PasajerosDetalle
 
 insert into Envios(Descripcion) values('Melvin la para')
 

@@ -73,7 +73,7 @@
                 <div class="form-group">
                     <label for="AnoServicioTextBox" class="col-md-3 control-label input-sm">Años en servicio: </label>
                     <div class="col-md-5">
-                        <asp:TextBox ID="AnoServicioTextBox" runat="server" Class="form-control input-sm" placeholder="(Opcional)" MaxLength="2"></asp:TextBox>
+                        <asp:TextBox ID="AnoServicioTextBox" runat="server" Class="form-control input-sm" placeholder="(Opcional)" MaxLength="2" type="number"></asp:TextBox>
 
 
                     </div>
@@ -85,7 +85,7 @@
                 <div class="form-group">
                     <label for="TelefonoTextBox" class="col-md-3 control-label input-sm">Telefono: </label>
                     <div class="col-md-5">
-                        <asp:TextBox ID="TelefonoTextBox" runat="server" Class="form-control input-sm" placeholder="(Requerido)" TextMode="Phone"></asp:TextBox>
+                        <asp:TextBox ID="TelefonoTextBox" runat="server" Class="form-control input-sm" placeholder="(Requerido)" TextMode="Phone" MaxLength="12"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="TelefonoRequiredFieldValidator" runat="server" ErrorMessage="No puede dejar este campo vacío" ValidationGroup="ChoferesForm" ControlToValidate="TelefonoTextBox" ForeColor="Red" Display="Dynamic" Font-Bold="True"></asp:RequiredFieldValidator>
 
                     </div>

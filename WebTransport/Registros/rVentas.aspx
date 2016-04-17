@@ -54,7 +54,7 @@
 
                     <div class="col-md-2">
 
-                        <asp:DropDownList ID="UsuarioIdDropDownList" runat="server" Class="form-control input-sm"></asp:DropDownList>
+                        <asp:DropDownList ID="UsuarioIdDropDownList" runat="server" Class="form-control input-sm btn-default"></asp:DropDownList>
 
                     </div>
 
@@ -69,7 +69,7 @@
 
                     <div class="col-md-2 col-md-pull-6">
 
-                        <asp:DropDownList ID="AutobusIdDropDownList" runat="server" Class="form-control input-sm">
+                        <asp:DropDownList ID="AutobusIdDropDownList" runat="server" Class="form-control input-sm btn-default">
                         </asp:DropDownList>
 
                     </div>
@@ -85,7 +85,7 @@
 
                     <div class="col-md-2 col-md-pull-5">
 
-                        <asp:DropDownList ID="ChoferIdDropDownList" runat="server" Class="form-control input-sm">
+                        <asp:DropDownList ID="ChoferIdDropDownList" runat="server" Class="form-control input-sm btn-default">
                         </asp:DropDownList>
 
                     </div>
@@ -121,7 +121,8 @@
 
                             <div class="col-md-2">
 
-                                <asp:TextBox ID="DescripcionTextBox" runat="server" Class="form-control input-sm"></asp:TextBox>
+                                <asp:TextBox ID="DescripcionTextBox" runat="server" Class="form-control input-sm" MaxLength="100"></asp:TextBox>
+                                 <asp:RequiredFieldValidator ID="DescripcionRequiredFieldValidator" runat="server" ErrorMessage="No se puede dejar este campo vacio" Font-Bold="True" ValidationGroup="VentaForm" Display="Dynamic" ControlToValidate="DescripcionTextBox" ForeColor="Red"></asp:RequiredFieldValidator>
 
                             </div>
 
@@ -136,7 +137,7 @@
 
                             <div class="col-md-2">
 
-                                <asp:DropDownList ID="TipoEnvioDropDownList" runat="server" Class="form-control input-sm"></asp:DropDownList>
+                                <asp:DropDownList ID="TipoEnvioDropDownList" runat="server" Class="form-control input-sm btn-default"></asp:DropDownList>
 
                             </div>
 
@@ -151,9 +152,10 @@
 
                             <div class="col-md-2">
 
-                                <asp:TextBox ID="PrecioTextBox" runat="server" Class="form-control input-sm"></asp:TextBox>
-
+                                <asp:TextBox ID="PrecioTextBox" runat="server" Class="form-control input-sm" type="number" MaxLength="5"></asp:TextBox>
+                                 <asp:RequiredFieldValidator ID="PrecioRequiredFieldValidator" runat="server" ErrorMessage="No se puede dejar este campo vacio" Font-Bold="True" ValidationGroup="VentaForm" Display="Dynamic" ControlToValidate="PrecioTextBox" ForeColor="Red"></asp:RequiredFieldValidator>
                             </div>
+                           
 
                         </div>
 
@@ -166,7 +168,8 @@
 
                             <div class="col-md-2">
 
-                                <asp:TextBox ID="EmisorTextBox" runat="server" Class="form-control input-sm"></asp:TextBox>
+                                <asp:TextBox ID="EmisorTextBox" runat="server" Class="form-control input-sm" MaxLength="40"></asp:TextBox>
+                                 <asp:RequiredFieldValidator ID="EmisorRequiredFieldValidator" runat="server" ErrorMessage="No se puede dejar este campo vacio" Font-Bold="True" ValidationGroup="VentaForm" Display="Dynamic" ControlToValidate="EmisorTextBox" ForeColor="Red"></asp:RequiredFieldValidator>
 
                             </div>
 
@@ -182,13 +185,14 @@
 
 
                                 <asp:TextBox ID="ReceptorTextBox" runat="server" class="form-control input-sm"></asp:TextBox>
+                                 <asp:RequiredFieldValidator ID="ReceptorRequiredFieldValidator" runat="server" ErrorMessage="No se puede dejar este campo vacio" Font-Bold="True" ValidationGroup="VentaForm" Display="Dynamic" ControlToValidate="ReceptorTextBox" ForeColor="Red"></asp:RequiredFieldValidator>
 
 
                             </div>
 
                             <div class="col-md-1 col-md-pull-4 col-sm-2 col-xs-4">
 
-                                <asp:Button ID="AgregarButton" runat="server" class="btn btn-info btn-md" Text="Agregar" OnClick="AgregarButton_Click" />
+                                <asp:Button ID="AgregarButton" runat="server" class="btn btn-info btn-md" Text="Agregar" OnClick="AgregarButton_Click" ValidationGroup="VentaForm" />
 
                             </div>
 
@@ -206,13 +210,9 @@
 
                             <div class="col-md-2 col-md-pull-5">
 
-                                <asp:GridView ID="EnviosGridView" runat="server" Class="table table-bordered table-hover table-striped" OnRowDeleting="EnviosGridView_RowDeleting">
+                                <asp:GridView ID="EnviosGridView" runat="server" Class="table table-bordered table-hover table-striped">
                                     <Columns>
-                                        <asp:TemplateField>
-                                            <ItemTemplate>
-                                                <asp:Button ID="btnDelete" runat="server" Text="Eliminar" CssClass="btn btn-info btn-sm" CommandName="Delete" />
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
+                                      <asp:CommandField ShowDeleteButton="true" ButtonType="Button" />
                                     </Columns>
 
                                 </asp:GridView>
@@ -248,11 +248,8 @@
 
 
 
-        <div class="panel-heading panel panel-info">Pasajeros</div>
-
-
-
-        <div class="panel-body col-md-offset-2">
+        <div class="panel-heading panel panel-info">Pasajeros</div>      
+            <div class="panel-body col-md-offset-2">
 
             <asp:UpdatePanel runat="server">
 
@@ -265,7 +262,7 @@
 
                         <div class="col-md-2 col-md-pull-4 col-sm-2 col-xs-4">
 
-                            <asp:DropDownList ID="NombresDropDownList" runat="server" class="form-control input-sm" ReadOnly="true"></asp:DropDownList>
+                            <asp:DropDownList ID="NombresDropDownList" runat="server" class="form-control input-sm btn-default"></asp:DropDownList>
 
                         </div>
 
@@ -304,7 +301,7 @@
                 <div class="form-group" style="display: inline-block">
                     <asp:Button Text="Nuevo" class="btn btn-warning btn-md" runat="server" ID="NuevoButton" OnClick="NuevoButton_Click" />
                     <asp:Button Text="Guardar" class="btn btn-primary btn-md" runat="server" ID="GuadarButton" OnClick="GuadarButton_Click" />
-                    <asp:Button Text="Eliminar" class="btn btn-danger btn-md" runat="server" ID="EliminarButton" />
+                    <asp:Button Text="Eliminar" class="btn btn-danger btn-md" runat="server" ID="EliminarButton" OnClick="EliminarButton_Click" />
                 </div>
             </div>
         </div>

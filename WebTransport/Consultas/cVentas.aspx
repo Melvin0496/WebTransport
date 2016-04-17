@@ -14,12 +14,14 @@
 
                         <%--CamposDropDownList--%>
                         <div class="form-group">
-                            <label for="CamposDropDownList" class="col-md-3 col-xs-3 control-label input-sm">Buscar por: </label>
+                            <label for="CamposCheckBox" class="col-md-4 col-xs-3 control-label input-sm">Buscar por: </label>
+                            <div class="col-md-1 col-sm-3 col-xs-3">
+                                <asp:CheckBox ID="CamposCheckBox" runat="server" class="input-sm"></asp:CheckBox>
+                            </div>
                             <div class="col-md-2 col-sm-2 col-xs-3">
                                 <asp:DropDownList ID="CamposDropDownList" runat="server" class="form-control input-sm btn-info">
                                     <asp:ListItem>VentaId</asp:ListItem>
                                     <asp:ListItem>ChoferId</asp:ListItem>
-                                    <asp:ListItem>Fecha</asp:ListItem>
                                     <asp:ListItem>UsuarioId</asp:ListItem>
                                     <asp:ListItem>AutobusId</asp:ListItem>
                                 </asp:DropDownList>
@@ -35,6 +37,25 @@
                             <div class="col-md-1">
                             </div>
                         </div>
+
+                        <%--Fecha--%>
+                        <div class="form-group">
+                            <label for="FechaCheckBox" class="col-md-4 col-xs-3 control-label input-sm">Fecha: </label>
+                              <div class="col-md-1 col-sm-2 col-xs-3">
+                                <asp:CheckBox ID="FechaCheckBox" runat="server" class="input-sm"></asp:CheckBox>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-md-offset-1 col-xs-3">
+                                <asp:TextBox ID="FechaDesdeTextBox" runat="server" class="form-control input-sm" placeholder="Fecha desde"></asp:TextBox>
+                            </div>
+                            <div class="col-md-2 col-sm-3 col-xs-3">
+                                <asp:TextBox ID="FechaHastaTextBox" runat="server" class="form-control input-sm" placeholder="Fecha hasta"></asp:TextBox>
+                            </div>
+                            <div class="col-md-1 col-sm-2 col-xs-4">
+                            </div>
+                            <div class="col-md-1">
+                            </div>
+                        </div>
+
                         <%--DatosGridView--%>
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-2 col-sm-4 col-xs-2">

@@ -19,16 +19,28 @@ namespace WebTransport.Consultas
         {
             string condicion;
             Ventas ventas = new Ventas();
-            if (CamposTextBox.Text.Trim().Length == 0)
+
+            if (CamposCheckBox.Checked)
             {
-                condicion = " 1=1 ";
-            }
-            else
+                if (CamposTextBox.Text.Trim().Length == 0)
+                {
+                    condicion = " 1=1 ";
+                }
+
+                else
+                {
+                    condicion = CamposDropDownList.SelectedItem.Text + " = " + CamposTextBox.Text;
+                }
+                DatosGridView.DataSource = ventas.Listado(" * ", condicion, " ");
+                DatosGridView.DataBind();
+            }else if (FechaCheckBox.Checked)
             {
-                condicion = CamposDropDownList.SelectedItem.Text + " = " + CamposTextBox.Text;
+                condicion = "Fecha between '" + FechaDesdeTextBox.Text + "' and '" + FechaHastaTextBox.Text + "'";
+
+                DatosGridView.DataSource = ventas.Listado(" * ", condicion, " ");
+                DatosGridView.DataBind();
             }
-            DatosGridView.DataSource = ventas.Listado(" * ", condicion, " ");
-            DatosGridView.DataBind();
+
         }
     }
 }

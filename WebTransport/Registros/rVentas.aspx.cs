@@ -15,8 +15,33 @@ namespace WebTransport.Registros
         {
             if (!IsPostBack)
             {
+                EliminarButton.Enabled = false;
                 LlenarDropDownList();
+                ValidarDropDownList();
+                int Id;
+                if (Request.QueryString["Id"] != null)
+                {
+                    Id = Utilitarios.ToInt(Request.QueryString["Id"].ToString());
+
+                    if (Id > 0)
+                    {
+                        Ventas venta = new Ventas();
+                        if (!venta.Buscar(Id))
+                        {
+                            Utilitarios.ShowToastr(this, "Registro no encontrado", "Error", "Danger");
+                            LimpiarClase();
+                            LimpiarLista();
+                        }
+                        else
+                        {
+                            VentaIdTextBox.Text = Id.ToString();
+                            DevolverDatos(venta);
+                        }
+
+                    }
+                }
             }
+
         }
 
         public void LlenarDropDownList()
@@ -55,6 +80,30 @@ namespace WebTransport.Registros
 
         }
 
+        public void ValidarDropDownList()
+        {
+            if(UsuarioIdDropDownList.Items.Count == 0)
+            {
+                Response.Redirect("/Registros/rUsuarios.aspx");
+
+            }else if(ChoferIdDropDownList.Items.Count == 0)
+            {
+                Response.Redirect("/Registros/rChoferes.aspx");
+
+            }else if(AutobusIdDropDownList.Items.Count == 0)
+            {
+                Response.Redirect("/Registros/rAutobuses.aspx");
+
+            }else if(NombresDropDownList.Items.Count == 0)
+            {
+                Response.Redirect("/Registros/rPasajeros.aspx");
+
+            }else if(TipoEnvioDropDownList.Items.Count == 0)
+            {
+                Response.Redirect("/Registros/rTipoEnvios.aspx");
+            }
+        }
+
         public void LimpiarClase()
         {
             VentaIdTextBox.Text = string.Empty;
@@ -63,6 +112,7 @@ namespace WebTransport.Registros
             UsuarioIdDropDownList.SelectedIndex = 0;
             AutobusIdDropDownList.SelectedIndex = 0;
             TotalLabel.Text = string.Empty;
+            EliminarButton.Enabled = false;
 
         }
 
@@ -136,29 +186,29 @@ namespace WebTransport.Registros
             LimpiarLista();
         }
 
-        protected void EnviosGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-            DataTable dt = (DataTable)Session["Venta"];
-            dt.Rows[Utilitarios.ToInt(e.RowIndex.ToString())].Delete();
-            Session["Venta"] = dt;
-            EnviosGridView.DataSource = Session["Venta"] as DataTable;
-            EnviosGridView.DataBind();
+        //protected void EnviosGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        //{
+        //    DataTable dt = (DataTable)Session["Venta"];
+        //    dt.Rows[Utilitarios.ToInt(e.RowIndex.ToString())].Delete();
+        //    Session["Venta"] = dt;
+        //    EnviosGridView.DataSource = Session["Venta"] as DataTable;
+        //    EnviosGridView.DataBind();
 
-        }
+        //}
 
         protected void BuscarButton_Click(object sender, EventArgs e)
         {
             Ventas venta = new Ventas();
 
-            if(VentaIdTextBox.Text.Length == 0)
+            if (VentaIdTextBox.Text.Length == 0)
             {
-                Utilitarios.ShowToastr(this,"Introduzca un ID","Alerta","Warning");
+                Utilitarios.ShowToastr(this, "Introduzca un ID", "Alerta", "Warning");
             }
             else
             {
                 venta.VentaId = Utilitarios.ToInt(VentaIdTextBox.Text);
 
-                if(venta.VentaId > 0)
+                if (venta.VentaId > 0)
                 {
                     if (venta.Buscar(venta.VentaId))
                     {
@@ -178,43 +228,90 @@ namespace WebTransport.Registros
         {
             Ventas venta = new Ventas();
 
-            if(VentaIdTextBox.Text.Length == 0)
+            if (EnviosGridView.Rows.Count == 0)
             {
-                LlenarCampos(venta);
-                if (venta.Insertar())
+                Utilitarios.ShowToastr(this, "Debes añadir envios o pasajeros a la venta", "Alerta", "Warning");
+            }
+            else
+            {
+                if (VentaIdTextBox.Text.Length == 0)
                 {
-                    Utilitarios.ShowToastr(this,"Transaccion exitosa!!!","Mensaje","Success");
-                    LimpiarClase();
-                    LimpiarLista();
+                    LlenarCampos(venta);
+                    if (venta.Insertar())
+                    {
+                        Utilitarios.ShowToastr(this, "Transaccion exitosa!!!", "Mensaje", "Success");
+                        LimpiarClase();
+                        LimpiarLista();
+                    }
+                    else
+                    {
+                        Utilitarios.ShowToastr(this, "Error al insertar", "Error", "Danger");
+                    }
                 }
                 else
                 {
-                    Utilitarios.ShowToastr(this,"Error al insertar","Error","Danger");
+                    venta.VentaId = Utilitarios.ToInt(VentaIdTextBox.Text);
+
+                    if (venta.VentaId > 0)
+                    {
+                        if (venta.Buscar(venta.VentaId))
+                        {
+                            LlenarCampos(venta);
+                            if (venta.Editar())
+                            {
+                                Utilitarios.ShowToastr(this, "Transaccion exitosa!!!", "Mensaje", "Success");
+                                LimpiarClase();
+                                LimpiarLista();
+                            }
+                        }
+                        else
+                        {
+                            Response.Write("<SCRIPT>alert('No se pudo editar...ID incorrecto')</SCRIPT>");
+                            LimpiarLista();
+                            LimpiarClase();
+                        }
+                    }
                 }
+            }
+        }
+
+        protected void EnviosGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            Ventas venta = new Ventas();
+            DataTable dt = (DataTable)Session["Venta"];
+            dt.Rows[Utilitarios.ToInt(e.RowIndex.ToString())].Delete();
+            Session["Venta"] = dt;
+            EnviosGridView.DataSource = venta.Envio;
+            EnviosGridView.DataBind();
+        }
+
+        protected void EliminarButton_Click(object sender, EventArgs e)
+        {
+            Ventas venta = new Ventas();
+
+            if (VentaIdTextBox.Text.Length == 0)
+            {
+                Utilitarios.ShowToastr(this, "Introduzca un ID", "Alerta", "Warning");
             }
             else
             {
                 venta.VentaId = Utilitarios.ToInt(VentaIdTextBox.Text);
 
-                if(venta.VentaId > 0)
+                if (venta.Buscar(venta.VentaId))
                 {
-                    if (venta.Buscar(venta.VentaId)) {
-                        LlenarCampos(venta);
-                        if (venta.Editar())
-                        {
-                            Utilitarios.ShowToastr(this,"Transaccion exitosa!!!","Mensaje","Success");
-                            LimpiarClase();
-                            LimpiarLista();
-                        }
-                    }
-                    else
-                    {
-                        Response.Write("<SCRIPT>alert('No se pudo editar...ID incorrecto')</SCRIPT>");
-                        LimpiarLista();
-                        LimpiarClase();
-                    }
+                    venta.Eliminar();
+                    Utilitarios.ShowToastr(this, "Transaccion exitosa!!!", "Mensaje", "Success");
+                    LimpiarClase();
+                    LimpiarLista();
+                }
+                else
+                {
+                    Response.Write("<SCRIPT>alert('ID incorrecto')</SCRIPT>");
+                    LimpiarClase();
+                    LimpiarLista();
                 }
             }
+
         }
 
         protected void AgregarButton_Click(object sender, EventArgs e)
