@@ -13,6 +13,11 @@ TipoUsuario int,
 Fecha datetime
 )
 
+select *from Ventas
+select *from EnviosDetalle
+select *from PasajerosDetalle
+select *from Autobuses
+
 select *from Paradas
 select *from Usuarios
 select *from Reservaciones

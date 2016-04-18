@@ -175,6 +175,15 @@ namespace WebTransport.Registros {
         protected global::System.Web.UI.WebControls.Label TotalLabel;
         
         /// <summary>
+        /// TotalEnviosLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label TotalEnviosLabel;
+        
+        /// <summary>
         /// NombresDropDownList control.
         /// </summary>
         /// <remarks>
@@ -182,6 +191,24 @@ namespace WebTransport.Registros {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList NombresDropDownList;
+        
+        /// <summary>
+        /// PrecioPasajeroTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox PrecioPasajeroTextBox;
+        
+        /// <summary>
+        /// PrecioPasajerosRequiredFieldValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator PrecioPasajerosRequiredFieldValidator;
         
         /// <summary>
         /// AgregarPasajerosButton control.
@@ -202,13 +229,22 @@ namespace WebTransport.Registros {
         protected global::System.Web.UI.WebControls.GridView PasajerosGridView;
         
         /// <summary>
-        /// Label1 control.
+        /// TotalPasajeroLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label TotalPasajeroLabel;
+        
+        /// <summary>
+        /// TotalPasajeroEnLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label TotalPasajeroEnLabel;
         
         /// <summary>
         /// NuevoButton control.

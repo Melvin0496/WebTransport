@@ -82,23 +82,27 @@ namespace WebTransport.Registros
 
         public void ValidarDropDownList()
         {
-            if(UsuarioIdDropDownList.Items.Count == 0)
+            if (UsuarioIdDropDownList.Items.Count == 0)
             {
                 Response.Redirect("/Registros/rUsuarios.aspx");
 
-            }else if(ChoferIdDropDownList.Items.Count == 0)
+            }
+            else if (ChoferIdDropDownList.Items.Count == 0)
             {
                 Response.Redirect("/Registros/rChoferes.aspx");
 
-            }else if(AutobusIdDropDownList.Items.Count == 0)
+            }
+            else if (AutobusIdDropDownList.Items.Count == 0)
             {
                 Response.Redirect("/Registros/rAutobuses.aspx");
 
-            }else if(NombresDropDownList.Items.Count == 0)
+            }
+            else if (NombresDropDownList.Items.Count == 0)
             {
                 Response.Redirect("/Registros/rPasajeros.aspx");
 
-            }else if(TipoEnvioDropDownList.Items.Count == 0)
+            }
+            else if (TipoEnvioDropDownList.Items.Count == 0)
             {
                 Response.Redirect("/Registros/rTipoEnvios.aspx");
             }
@@ -112,6 +116,9 @@ namespace WebTransport.Registros
             UsuarioIdDropDownList.SelectedIndex = 0;
             AutobusIdDropDownList.SelectedIndex = 0;
             TotalLabel.Text = string.Empty;
+            TotalPasajeroLabel.Text = string.Empty;
+            TotalPasajeroEnLabel.Text = string.Empty;
+            TotalEnviosLabel.Text = string.Empty;
             EliminarButton.Enabled = false;
 
         }
@@ -141,9 +148,13 @@ namespace WebTransport.Registros
             ReceptorTextBox.Text = string.Empty;
 
         }
-        float total = 0f, vari = 0f;
+        float total = 0f, total1 = 0f, vari = 0f, vari1 = 0;
         public void LlenarCampos(Ventas venta)
         {
+
+            Session["Venta"] = new Ventas();
+            Session["VentaPasajero"] = new Ventas();
+
             venta.Fecha = Utilitarios.ToDatetime(FechaTextBox.Text);
             venta.ChoferId = Utilitarios.ToInt(ChoferIdDropDownList.SelectedValue);
             venta.AutobusId = Utilitarios.ToInt(AutobusIdDropDownList.SelectedValue);
@@ -153,19 +164,22 @@ namespace WebTransport.Registros
 
             foreach (GridViewRow row in EnviosGridView.Rows)
             {
-                float.TryParse(row.Cells[2].Text, out vari);
-                venta.AgregarEnvios(row.Cells[0].Text, Utilitarios.ToInt(row.Cells[1].Text), vari, row.Cells[3].Text, row.Cells[4].Text);
-                total += vari;
+                float.TryParse(TotalLabel.Text, out vari);
+                venta.AgregarEnvios(row.Cells[1].Text, Utilitarios.ToInt(row.Cells[2].Text), vari, row.Cells[4].Text, row.Cells[5].Text);
+                total = vari;
             }
 
 
-            //foreach (GridViewRow row in PasajerosGridView.Rows)
-            //{
-            //    venta.AgregarPasajeros(Utilitarios.ToInt(NombresDropDownList.SelectedValue));
-            //}
+            foreach (GridViewRow row in PasajerosGridView.Rows)
+            {
+                float.TryParse(TotalPasajeroLabel.Text, out vari1);
+                venta.AgregarPasajeros(Utilitarios.ToInt(row.Cells[0].Text));
+                total1 = vari1;
+                
+            }
 
 
-            venta.Total = total;
+            venta.Total = total + total1;
 
         }
 
@@ -178,6 +192,9 @@ namespace WebTransport.Registros
 
             EnviosGridView.DataSource = venta.Envio;
             EnviosGridView.DataBind();
+
+            PasajerosGridView.DataSource = venta.Pasajero;
+            PasajerosGridView.DataBind();
 
         }
         protected void NuevoButton_Click(object sender, EventArgs e)
@@ -228,7 +245,7 @@ namespace WebTransport.Registros
         {
             Ventas venta = new Ventas();
 
-            if (EnviosGridView.Rows.Count == 0)
+            if (EnviosGridView.Rows.Count == 0 || PasajerosGridView.Rows.Count == 0)
             {
                 Utilitarios.ShowToastr(this, "Debes añadir envios o pasajeros a la venta", "Alerta", "Warning");
             }
@@ -314,6 +331,34 @@ namespace WebTransport.Registros
 
         }
 
+        protected void AgregarPasajerosButton_Click(object sender, EventArgs e)
+        {
+            Ventas ventas;
+
+            if (Session["VentaPasajero"] == null)
+            {
+                Session["VentaPasajero"] = new Ventas();
+            }
+
+            ventas = (Ventas)Session["VentaPasajero"];
+
+            ventas.AgregarPasajeros(Utilitarios.ToInt(NombresDropDownList.SelectedValue));
+
+            Session["VentaPasajero"] = ventas;
+
+            PasajerosGridView.DataSource = ventas.Pasajero;
+            PasajerosGridView.DataBind();
+
+            float sust1 = 0;
+            foreach (GridViewRow row in PasajerosGridView.Rows)
+            {
+                float.TryParse(PrecioPasajeroTextBox.Text, out vari1);
+                TotalPasajeroLabel.Text = (sust1 += vari1).ToString();
+                TotalPasajeroEnLabel.Text = PasajerosGridView.Rows.Count.ToString();
+            }
+            PrecioPasajeroTextBox.Text = string.Empty;
+        }
+
         protected void AgregarButton_Click(object sender, EventArgs e)
         {
 
@@ -337,8 +382,10 @@ namespace WebTransport.Registros
             float sust = 0;
             foreach (GridViewRow row in EnviosGridView.Rows)
             {
-                float.TryParse(row.Cells[2].Text, out vari);
+                float.TryParse(row.Cells[3].Text, out vari);
                 TotalLabel.Text = (sust += vari).ToString();
+                TotalEnviosLabel.Text = EnviosGridView.Rows.Count.ToString();
+                
             }
 
         }
