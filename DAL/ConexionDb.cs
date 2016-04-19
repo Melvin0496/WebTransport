@@ -16,7 +16,7 @@ namespace DAL
         {
             //Data Source=tcp:webtrasport01.database.windows.net,1433;Initial Catalog=WebTransportDb;User ID=admin01@webtrasport01;Password=Melvin1996, 
             //Data Source = MASTER - PC\\ROOT; Initial Catalog = WebTransportDb; Integrated Security = true 
-            conexion = new SqlConnection(@"Data Source = MASTER-PC\ROOT; Initial Catalog = WebTransportDb; Integrated Security = true");
+            conexion = new SqlConnection(@"Data Source=tcp:webtrasport01.database.windows.net,1433;Initial Catalog=WebTransportDb;User ID=admin01@webtrasport01;Password=Melvin1996,");
             comando = new SqlCommand();
         }
         public bool Ejecutar(String ComandoSql)
